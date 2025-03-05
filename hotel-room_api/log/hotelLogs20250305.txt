@@ -1,0 +1,72 @@
+2025-03-05 13:09:00.282 +02:00 [INF] User profile is available. Using '/Users/aymanyassien/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-03-05 13:09:00.365 +02:00 [INF] Now listening on: http://localhost:5244
+2025-03-05 13:09:00.366 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-03-05 13:09:00.366 +02:00 [INF] Hosting environment: Development
+2025-03-05 13:09:00.366 +02:00 [INF] Content root path: /Users/aymanyassien/hotel-room_solution/hotel-room_api
+2025-03-05 13:09:02.032 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/index.html - null null
+2025-03-05 13:09:02.158 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/index.html - 200 null text/html;charset=utf-8 127.1168ms
+2025-03-05 13:09:02.290 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/index.js - null null
+2025-03-05 13:09:02.295 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/index.js - 200 null application/javascript;charset=utf-8 6.2315ms
+2025-03-05 13:09:02.384 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/v1/swagger.json - null null
+2025-03-05 13:09:02.590 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 205.9138ms
+2025-03-05 13:09:30.325 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/Login - application/json; charset=utf-8 49
+2025-03-05 13:09:30.336 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-03-05 13:09:30.365 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Login (hotel-room_api)'
+2025-03-05 13:09:30.380 +02:00 [INF] Route matched with {action = "Login", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Login(hotel_room_api.Models.DTOs.InternalDTO.LoginRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 13:09:30.574 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Login (hotel-room_api) - Validation state: "Valid"
+2025-03-05 13:09:32.562 +02:00 [INF] Executed DbCommand (86ms) [Parameters=[@__loginRequestDto_UserName_0='?' (Size = 4000), @__loginRequestDto_Password_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[Name], [i].[Password], [i].[Role], [i].[UserName]
+FROM [InternalUsers] AS [i]
+WHERE LOWER([i].[UserName]) = @__loginRequestDto_UserName_0 AND [i].[Password] = @__loginRequestDto_Password_1
+2025-03-05 13:09:32.669 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Login (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 2090.2706ms.
+2025-03-05 13:09:32.681 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 13:09:32.767 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Login (hotel-room_api) in 2382.7454ms
+2025-03-05 13:09:32.768 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Login (hotel-room_api)'
+2025-03-05 13:09:32.787 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/Login - 200 374 application/json; charset=utf-8 2461.6834ms
+2025-03-05 13:09:32.875 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/api/RoomApi - null null
+2025-03-05 13:09:32.921 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 13:09:32.925 +02:00 [INF] Route matched with {action = "GetRooms", controller = "RoomApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] GetRooms(Int32, Int32) on controller hotel_room_api.Controllers.RoomApiController (hotel-room_api).
+2025-03-05 13:09:33.025 +02:00 [INF] Executing action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) - Validation state: "Valid"
+2025-03-05 13:09:33.026 +02:00 [INF] Get All Rooms :)
+2025-03-05 13:09:33.050 +02:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[Id], [r].[Amenity], [r].[Details], [r].[ImageUrl], [r].[Name], [r].[NumberOfBeds], [r].[Rate], [r].[SpaceByMiter], [r].[createdDate], [r].[updatedDate]
+FROM [Rooms] AS [r]
+2025-03-05 13:09:33.087 +02:00 [INF] Executed action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 62.5714ms.
+2025-03-05 13:09:33.088 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 13:09:33.096 +02:00 [INF] Executed action hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) in 170.9998ms
+2025-03-05 13:09:33.096 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 13:09:33.096 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/api/RoomApi - 200 3100 application/json; charset=utf-8 221.4304ms
+2025-03-05 13:09:53.542 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/api/RoomApi - null null
+2025-03-05 13:09:53.558 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 13:09:53.559 +02:00 [INF] Route matched with {action = "GetRooms", controller = "RoomApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] GetRooms(Int32, Int32) on controller hotel_room_api.Controllers.RoomApiController (hotel-room_api).
+2025-03-05 13:09:53.608 +02:00 [INF] Executing action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) - Validation state: "Valid"
+2025-03-05 13:09:53.608 +02:00 [INF] Get All Rooms :)
+2025-03-05 13:09:53.630 +02:00 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[Id], [r].[Amenity], [r].[Details], [r].[ImageUrl], [r].[Name], [r].[NumberOfBeds], [r].[Rate], [r].[SpaceByMiter], [r].[createdDate], [r].[updatedDate]
+FROM [Rooms] AS [r]
+2025-03-05 13:09:53.633 +02:00 [INF] Executed action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 24.6266ms.
+2025-03-05 13:09:53.633 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 13:09:53.634 +02:00 [INF] Executed action hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) in 75.8395ms
+2025-03-05 13:09:53.635 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 13:09:53.635 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/api/RoomApi - 200 3100 application/json; charset=utf-8 93.1919ms
+2025-03-05 13:09:54.767 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/api/bedNumber - null null
+2025-03-05 13:09:54.770 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.BedNumberApi.GetBedNumbers (hotel-room_api)'
+2025-03-05 13:09:54.775 +02:00 [INF] Route matched with {action = "GetBedNumbers", controller = "BedNumberApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] GetBedNumbers() on controller hotel_room_api.Controllers.BedNumberApi (hotel-room_api).
+2025-03-05 13:09:54.779 +02:00 [INF] Executing action method hotel_room_api.Controllers.BedNumberApi.GetBedNumbers (hotel-room_api) - Validation state: "Valid"
+2025-03-05 13:09:54.805 +02:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-03-05 13:09:54.805 +02:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-03-05 13:09:54.962 +02:00 [INF] Executed DbCommand (109ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [b0].[bedNo], [b0].[CreatedDate], [b0].[RoomId], [b0].[UpdatedDate], [b0].[specialDetails], [r].[Id], [r].[Amenity], [r].[Details], [r].[ImageUrl], [r].[Name], [r].[NumberOfBeds], [r].[Rate], [r].[SpaceByMiter], [r].[createdDate], [r].[updatedDate]
+FROM (
+    SELECT [b].[bedNo], [b].[CreatedDate], [b].[RoomId], [b].[UpdatedDate], [b].[specialDetails]
+    FROM [BedNumbers] AS [b]
+    ORDER BY (SELECT 1)
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [b0]
+INNER JOIN [Rooms] AS [r] ON [b0].[RoomId] = [r].[Id]
+2025-03-05 13:09:54.986 +02:00 [INF] Executed action method hotel_room_api.Controllers.BedNumberApi.GetBedNumbers (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 207.7027ms.
+2025-03-05 13:09:54.987 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 13:09:54.995 +02:00 [INF] Executed action hotel_room_api.Controllers.BedNumberApi.GetBedNumbers (hotel-room_api) in 219.7221ms
+2025-03-05 13:09:54.995 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.BedNumberApi.GetBedNumbers (hotel-room_api)'
+2025-03-05 13:09:54.995 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/api/bedNumber - 200 945 application/json; charset=utf-8 228.4208ms
+2025-03-05 13:10:04.479 +02:00 [INF] Application is shutting down...

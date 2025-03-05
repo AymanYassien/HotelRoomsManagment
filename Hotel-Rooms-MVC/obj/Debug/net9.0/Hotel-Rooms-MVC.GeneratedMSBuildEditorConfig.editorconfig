@@ -1,0 +1,105 @@
+is_global = true
+build_property.TargetFramework = net9.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Hotel_Rooms_MVC
+build_property.RootNamespace = Hotel_Rooms_MVC
+build_property.ProjectDir = /Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 9.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 9.0
+build_property.EnableCodeStyleSeverity = 
+
+[/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/Views/Auth/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXV0aC9BY2Nlc3NEZW5pZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/Views/Auth/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXV0aC9Mb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/Views/Auth/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXV0aC9Mb2dvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/Views/Auth/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXV0aC9SZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/Views/BedNumber/AddNewBedNumber.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQmVkTnVtYmVyL0FkZE5ld0JlZE51bWJlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/Views/BedNumber/DeleteBedNumber.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQmVkTnVtYmVyL0RlbGV0ZUJlZE51bWJlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/Views/BedNumber/IndexBedNumber.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQmVkTnVtYmVyL0luZGV4QmVkTnVtYmVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/Views/BedNumber/UpdateBedNumber.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQmVkTnVtYmVyL1VwZGF0ZUJlZE51bWJlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/Views/Room/CreateRoom.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUm9vbS9DcmVhdGVSb29tLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/Views/Room/DeleteRoom.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUm9vbS9EZWxldGVSb29tLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/Views/Room/IndexRoom.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUm9vbS9JbmRleFJvb20uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/Views/Room/UpdateRoom.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUm9vbS9VcGRhdGVSb29tLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/Views/Shared/_Notification.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19Ob3RpZmljYXRpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/Views/Shared/_RoomCardPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19Sb29tQ2FyZFBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-2h8zb4rut3
