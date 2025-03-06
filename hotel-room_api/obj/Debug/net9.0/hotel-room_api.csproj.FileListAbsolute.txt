@@ -173,3 +173,5 @@
 /Users/aymanyassien/hotel-room_solution/hotel-room_api/bin/Debug/net9.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /Users/aymanyassien/hotel-room_solution/hotel-room_api/bin/Debug/net9.0/Microsoft.AspNetCore.Mvc.Versioning.dll
 /Users/aymanyassien/hotel-room_solution/hotel-room_api/bin/Debug/net9.0/Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer.dll
+/Users/aymanyassien/hotel-room_solution/hotel-room_api/bin/Debug/net9.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+/Users/aymanyassien/hotel-room_solution/hotel-room_api/obj/Debug/net9.0/hotel-room_api.sourcelink.json

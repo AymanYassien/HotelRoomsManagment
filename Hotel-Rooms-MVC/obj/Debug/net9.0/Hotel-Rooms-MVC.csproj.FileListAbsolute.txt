@@ -100,6 +100,12 @@
 /Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/obj/Debug/net9.0/compressed/jstpn7bid4-tbt166dl4g.gz
 /Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/obj/Debug/net9.0/compressed/h7zsp76ad8-o0ca1vgtht.gz
 /Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/obj/Debug/net9.0/compressed/tfy0rvl4cp-o0ca1vgtht.gz
-/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/obj/Debug/net9.0/compressed/iktyfhr8sa-0a66adl17o.gz
 /Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/obj/Debug/net9.0/compressed/meodz2la4g-l6wsnjwo2g.gz
-/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/obj/Debug/net9.0/compressed/8i1lhmhi92-c7f5hwelc2.gz
+/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/obj/Debug/net9.0/Hotel-Rooms-MVC.sourcelink.json
+/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/obj/Debug/net9.0/compressed/8i1lhmhi92-g183ho9kpc.gz
+/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/obj/Debug/net9.0/compressed/iktyfhr8sa-eksw0bqnhj.gz
+/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/bin/Debug/net9.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/bin/Debug/net9.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/bin/Debug/net9.0/Microsoft.IdentityModel.Logging.dll
+/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/bin/Debug/net9.0/Microsoft.IdentityModel.Tokens.dll
+/Users/aymanyassien/hotel-room_solution/Hotel-Rooms-MVC/bin/Debug/net9.0/System.IdentityModel.Tokens.Jwt.dll

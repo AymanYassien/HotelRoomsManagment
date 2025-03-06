@@ -70,3 +70,992 @@ INNER JOIN [Rooms] AS [r] ON [b0].[RoomId] = [r].[Id]
 2025-03-05 13:09:54.995 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.BedNumberApi.GetBedNumbers (hotel-room_api)'
 2025-03-05 13:09:54.995 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/api/bedNumber - 200 945 application/json; charset=utf-8 228.4208ms
 2025-03-05 13:10:04.479 +02:00 [INF] Application is shutting down...
+2025-03-05 14:09:44.657 +02:00 [INF] Executed DbCommand (46ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-03-05 14:09:44.682 +02:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2025-03-05 14:09:44.755 +02:00 [INF] Executed DbCommand (71ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2025-03-05 14:09:44.820 +02:00 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2025-03-05 14:09:44.829 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-03-05 14:09:44.830 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-03-05 14:09:44.857 +02:00 [INF] Executed DbCommand (26ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2025-03-05 14:09:44.864 +02:00 [INF] Applying migration '20250305120918_addIdentityUserTable'.
+2025-03-05 14:09:45.001 +02:00 [INF] Executed DbCommand (110ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [AspNetRoles] (
+    [Id] nvarchar(450) NOT NULL,
+    [Name] nvarchar(256) NULL,
+    [NormalizedName] nvarchar(256) NULL,
+    [ConcurrencyStamp] nvarchar(max) NULL,
+    CONSTRAINT [PK_AspNetRoles] PRIMARY KEY ([Id])
+);
+2025-03-05 14:09:45.008 +02:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [AspNetUsers] (
+    [Id] nvarchar(450) NOT NULL,
+    [Name] nvarchar(max) NOT NULL,
+    [UserName] nvarchar(256) NULL,
+    [NormalizedUserName] nvarchar(256) NULL,
+    [Email] nvarchar(256) NULL,
+    [NormalizedEmail] nvarchar(256) NULL,
+    [EmailConfirmed] bit NOT NULL,
+    [PasswordHash] nvarchar(max) NULL,
+    [SecurityStamp] nvarchar(max) NULL,
+    [ConcurrencyStamp] nvarchar(max) NULL,
+    [PhoneNumber] nvarchar(max) NULL,
+    [PhoneNumberConfirmed] bit NOT NULL,
+    [TwoFactorEnabled] bit NOT NULL,
+    [LockoutEnd] datetimeoffset NULL,
+    [LockoutEnabled] bit NOT NULL,
+    [AccessFailedCount] int NOT NULL,
+    CONSTRAINT [PK_AspNetUsers] PRIMARY KEY ([Id])
+);
+2025-03-05 14:09:45.020 +02:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [AspNetRoleClaims] (
+    [Id] int NOT NULL IDENTITY,
+    [RoleId] nvarchar(450) NOT NULL,
+    [ClaimType] nvarchar(max) NULL,
+    [ClaimValue] nvarchar(max) NULL,
+    CONSTRAINT [PK_AspNetRoleClaims] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_AspNetRoleClaims_AspNetRoles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [AspNetRoles] ([Id]) ON DELETE CASCADE
+);
+2025-03-05 14:09:45.024 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [AspNetUserClaims] (
+    [Id] int NOT NULL IDENTITY,
+    [UserId] nvarchar(450) NOT NULL,
+    [ClaimType] nvarchar(max) NULL,
+    [ClaimValue] nvarchar(max) NULL,
+    CONSTRAINT [PK_AspNetUserClaims] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_AspNetUserClaims_AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE CASCADE
+);
+2025-03-05 14:09:45.034 +02:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [AspNetUserLogins] (
+    [LoginProvider] nvarchar(450) NOT NULL,
+    [ProviderKey] nvarchar(450) NOT NULL,
+    [ProviderDisplayName] nvarchar(max) NULL,
+    [UserId] nvarchar(450) NOT NULL,
+    CONSTRAINT [PK_AspNetUserLogins] PRIMARY KEY ([LoginProvider], [ProviderKey]),
+    CONSTRAINT [FK_AspNetUserLogins_AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE CASCADE
+);
+2025-03-05 14:09:45.043 +02:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [AspNetUserRoles] (
+    [UserId] nvarchar(450) NOT NULL,
+    [RoleId] nvarchar(450) NOT NULL,
+    CONSTRAINT [PK_AspNetUserRoles] PRIMARY KEY ([UserId], [RoleId]),
+    CONSTRAINT [FK_AspNetUserRoles_AspNetRoles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [AspNetRoles] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_AspNetUserRoles_AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE CASCADE
+);
+2025-03-05 14:09:45.049 +02:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [AspNetUserTokens] (
+    [UserId] nvarchar(450) NOT NULL,
+    [LoginProvider] nvarchar(450) NOT NULL,
+    [Name] nvarchar(450) NOT NULL,
+    [Value] nvarchar(max) NULL,
+    CONSTRAINT [PK_AspNetUserTokens] PRIMARY KEY ([UserId], [LoginProvider], [Name]),
+    CONSTRAINT [FK_AspNetUserTokens_AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE CASCADE
+);
+2025-03-05 14:09:45.076 +02:00 [INF] Executed DbCommand (27ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+UPDATE [Rooms] SET [ImageUrl] = N''
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+2025-03-05 14:09:45.079 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+UPDATE [Rooms] SET [ImageUrl] = N''
+WHERE [Id] = 2;
+SELECT @@ROWCOUNT;
+2025-03-05 14:09:45.082 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+UPDATE [Rooms] SET [ImageUrl] = N''
+WHERE [Id] = 3;
+SELECT @@ROWCOUNT;
+2025-03-05 14:09:45.084 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+UPDATE [Rooms] SET [ImageUrl] = N''
+WHERE [Id] = 4;
+SELECT @@ROWCOUNT;
+2025-03-05 14:09:45.085 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+UPDATE [Rooms] SET [ImageUrl] = N''
+WHERE [Id] = 5;
+SELECT @@ROWCOUNT;
+2025-03-05 14:09:45.090 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_AspNetRoleClaims_RoleId] ON [AspNetRoleClaims] ([RoleId]);
+2025-03-05 14:09:45.095 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX [RoleNameIndex] ON [AspNetRoles] ([NormalizedName]) WHERE [NormalizedName] IS NOT NULL;
+2025-03-05 14:09:45.099 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_AspNetUserClaims_UserId] ON [AspNetUserClaims] ([UserId]);
+2025-03-05 14:09:45.102 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_AspNetUserLogins_UserId] ON [AspNetUserLogins] ([UserId]);
+2025-03-05 14:09:45.105 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_AspNetUserRoles_RoleId] ON [AspNetUserRoles] ([RoleId]);
+2025-03-05 14:09:45.107 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [EmailIndex] ON [AspNetUsers] ([NormalizedEmail]);
+2025-03-05 14:09:45.110 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX [UserNameIndex] ON [AspNetUsers] ([NormalizedUserName]) WHERE [NormalizedUserName] IS NOT NULL;
+2025-03-05 14:09:45.118 +02:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20250305120918_addIdentityUserTable', N'9.0.2');
+2025-03-05 14:09:45.127 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_releaseapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session';
+SELECT @result
+2025-03-05 14:56:50.553 +02:00 [INF] User profile is available. Using '/Users/aymanyassien/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-03-05 14:56:50.714 +02:00 [INF] Now listening on: http://localhost:5244
+2025-03-05 14:56:50.717 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-03-05 14:56:50.717 +02:00 [INF] Hosting environment: Development
+2025-03-05 14:56:50.717 +02:00 [INF] Content root path: /Users/aymanyassien/hotel-room_solution/hotel-room_api
+2025-03-05 14:56:51.798 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/index.html - null null
+2025-03-05 14:56:52.046 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/index.html - 200 null text/html;charset=utf-8 249.7774ms
+2025-03-05 14:56:52.082 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/index.js - null null
+2025-03-05 14:56:52.086 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/index.js - 200 null application/javascript;charset=utf-8 4.6412ms
+2025-03-05 14:56:52.202 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/v1/swagger.json - null null
+2025-03-05 14:56:52.560 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 357.7734ms
+2025-03-05 14:57:40.691 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - application/json-patch+json 84
+2025-03-05 14:57:40.720 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-03-05 14:57:40.764 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 14:57:40.793 +02:00 [INF] Route matched with {action = "Register", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Register(hotel_room_api.Models.DTOs.InternalDTO.RegisterRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 14:57:41.063 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2025-03-05 14:57:41.124 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Register (hotel-room_api) in 327.4747ms
+2025-03-05 14:57:41.124 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 14:57:41.125 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - 400 242 application/problem+json; charset=utf-8 435.1697ms
+2025-03-05 14:58:10.736 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - application/json-patch+json 97
+2025-03-05 14:58:10.739 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 14:58:10.740 +02:00 [INF] Route matched with {action = "Register", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Register(hotel_room_api.Models.DTOs.InternalDTO.RegisterRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 14:58:10.766 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api) - Validation state: "Valid"
+2025-03-05 14:58:12.417 +02:00 [INF] Executed DbCommand (60ms) [Parameters=[@__userName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[Name], [i].[Password], [i].[Role], [i].[UserName]
+FROM [InternalUsers] AS [i]
+WHERE [i].[UserName] = @__userName_0
+2025-03-05 14:58:12.458 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 1686.9463ms.
+2025-03-05 14:58:12.463 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 14:58:12.475 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Register (hotel-room_api) in 1735.1139ms
+2025-03-05 14:58:12.476 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 14:58:12.489 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - 200 105 application/json; charset=utf-8 1753.551ms
+2025-03-05 14:59:19.934 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/login - application/json-patch+json 65
+2025-03-05 14:59:19.950 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Login (hotel-room_api)'
+2025-03-05 14:59:19.964 +02:00 [INF] Route matched with {action = "Login", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Login(hotel_room_api.Models.DTOs.InternalDTO.LoginRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 14:59:19.976 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Login (hotel-room_api) - Validation state: "Valid"
+2025-03-05 14:59:20.167 +02:00 [INF] Executed DbCommand (103ms) [Parameters=[@__ToLower_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE LOWER([a].[UserName]) = @__ToLower_0
+2025-03-05 14:59:20.171 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Login (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.BadRequestObjectResult in 194.5289ms.
+2025-03-05 14:59:20.171 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 14:59:20.172 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Login (hotel-room_api) in 208.0321ms
+2025-03-05 14:59:20.172 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Login (hotel-room_api)'
+2025-03-05 14:59:20.172 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/login - 400 104 application/json; charset=utf-8 240.9591ms
+2025-03-05 14:59:59.586 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/login - application/json-patch+json 65
+2025-03-05 14:59:59.592 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Login (hotel-room_api)'
+2025-03-05 14:59:59.594 +02:00 [INF] Route matched with {action = "Login", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Login(hotel_room_api.Models.DTOs.InternalDTO.LoginRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 14:59:59.597 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Login (hotel-room_api) - Validation state: "Valid"
+2025-03-05 14:59:59.702 +02:00 [INF] Executed DbCommand (21ms) [Parameters=[@__ToLower_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE LOWER([a].[UserName]) = @__ToLower_0
+2025-03-05 14:59:59.703 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Login (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.BadRequestObjectResult in 105.4079ms.
+2025-03-05 14:59:59.703 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 14:59:59.704 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Login (hotel-room_api) in 109.3009ms
+2025-03-05 14:59:59.704 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Login (hotel-room_api)'
+2025-03-05 14:59:59.704 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/login - 400 104 application/json; charset=utf-8 117.72ms
+2025-03-05 15:04:21.506 +02:00 [INF] Application is shutting down...
+2025-03-05 15:04:29.546 +02:00 [INF] User profile is available. Using '/Users/aymanyassien/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-03-05 15:04:29.744 +02:00 [INF] Now listening on: http://localhost:5244
+2025-03-05 15:04:29.747 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-03-05 15:04:29.747 +02:00 [INF] Hosting environment: Development
+2025-03-05 15:04:29.748 +02:00 [INF] Content root path: /Users/aymanyassien/hotel-room_solution/hotel-room_api
+2025-03-05 15:04:30.639 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/index.html - null null
+2025-03-05 15:04:30.778 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/index.html - 200 null text/html;charset=utf-8 140.9305ms
+2025-03-05 15:04:31.380 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/index.js - null null
+2025-03-05 15:04:31.386 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/index.js - 200 null application/javascript;charset=utf-8 6.3693ms
+2025-03-05 15:04:31.472 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/v1/swagger.json - null null
+2025-03-05 15:04:31.721 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 248.9081ms
+2025-03-05 15:05:18.402 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - application/json-patch+json 99
+2025-03-05 15:05:18.429 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-03-05 15:05:18.471 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 15:05:18.497 +02:00 [INF] Route matched with {action = "Register", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Register(hotel_room_api.Models.DTOs.InternalDTO.RegisterRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 15:05:18.754 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api) - Validation state: "Valid"
+2025-03-05 15:05:20.624 +02:00 [INF] Executed DbCommand (152ms) [Parameters=[@__userName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[Name], [i].[Password], [i].[Role], [i].[UserName]
+FROM [InternalUsers] AS [i]
+WHERE [i].[UserName] = @__userName_0
+2025-03-05 15:05:20.674 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 1915.5124ms.
+2025-03-05 15:05:20.685 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 15:05:20.766 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Register (hotel-room_api) in 2264.3715ms
+2025-03-05 15:05:20.769 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 15:05:20.791 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - 200 105 application/json; charset=utf-8 2389.5078ms
+2025-03-05 15:05:49.664 +02:00 [INF] Application is shutting down...
+2025-03-05 15:06:04.097 +02:00 [INF] User profile is available. Using '/Users/aymanyassien/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-03-05 15:06:04.249 +02:00 [INF] Now listening on: http://localhost:5244
+2025-03-05 15:06:04.251 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-03-05 15:06:04.251 +02:00 [INF] Hosting environment: Development
+2025-03-05 15:06:04.251 +02:00 [INF] Content root path: /Users/aymanyassien/hotel-room_solution/hotel-room_api
+2025-03-05 15:06:04.504 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/index.html - null null
+2025-03-05 15:06:04.673 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/index.html - 200 null text/html;charset=utf-8 170.1525ms
+2025-03-05 15:06:04.710 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/index.js - null null
+2025-03-05 15:06:04.713 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/index.js - 200 null application/javascript;charset=utf-8 6.052ms
+2025-03-05 15:06:04.807 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/v1/swagger.json - null null
+2025-03-05 15:06:05.163 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 355.7525ms
+2025-03-05 15:06:27.325 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - application/json-patch+json 100
+2025-03-05 15:06:27.392 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-03-05 15:06:27.839 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 15:06:28.037 +02:00 [INF] Route matched with {action = "Register", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Register(hotel_room_api.Models.DTOs.InternalDTO.RegisterRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 15:06:28.931 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api) - Validation state: "Valid"
+2025-03-05 15:06:31.603 +02:00 [INF] Executed DbCommand (86ms) [Parameters=[@__userName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[Name], [i].[Password], [i].[Role], [i].[UserName]
+FROM [InternalUsers] AS [i]
+WHERE [i].[UserName] = @__userName_0
+2025-03-05 15:07:57.324 +02:00 [INF] User profile is available. Using '/Users/aymanyassien/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-03-05 15:07:57.690 +02:00 [INF] Now listening on: http://localhost:5244
+2025-03-05 15:07:57.692 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-03-05 15:07:57.692 +02:00 [INF] Hosting environment: Development
+2025-03-05 15:07:57.692 +02:00 [INF] Content root path: /Users/aymanyassien/hotel-room_solution/hotel-room_api
+2025-03-05 15:07:59.473 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/index.html - null null
+2025-03-05 15:07:59.597 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/index.html - 200 null text/html;charset=utf-8 125.8382ms
+2025-03-05 15:07:59.625 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/index.js - null null
+2025-03-05 15:07:59.626 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/index.js - 200 null application/javascript;charset=utf-8 2.1502ms
+2025-03-05 15:07:59.707 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/v1/swagger.json - null null
+2025-03-05 15:07:59.916 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 208.9487ms
+2025-03-05 15:09:08.234 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - application/json-patch+json 101
+2025-03-05 15:09:08.260 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-03-05 15:09:08.360 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 15:09:08.386 +02:00 [INF] Route matched with {action = "Register", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Register(hotel_room_api.Models.DTOs.InternalDTO.RegisterRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 15:09:08.791 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api) - Validation state: "Valid"
+2025-03-05 15:09:11.079 +02:00 [INF] Executed DbCommand (115ms) [Parameters=[@__userName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[Name], [i].[Password], [i].[Role], [i].[UserName]
+FROM [InternalUsers] AS [i]
+WHERE [i].[UserName] = @__userName_0
+2025-03-05 15:09:25.967 +02:00 [INF] Executed DbCommand (129ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2025-03-05 15:09:26.391 +02:00 [INF] Executed DbCommand (92ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 4000), @p8='?' (Size = 256), @p9='?' (Size = 256), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (Size = 4000), @p14='?' (DbType = Boolean), @p15='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [Name], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15);
+2025-03-05 15:09:36.031 +02:00 [INF] Executed DbCommand (33ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2025-03-05 15:09:36.041 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2025-03-05 15:11:33.970 +02:00 [INF] User profile is available. Using '/Users/aymanyassien/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-03-05 15:11:34.240 +02:00 [INF] Now listening on: http://localhost:5244
+2025-03-05 15:11:34.241 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-03-05 15:11:34.242 +02:00 [INF] Hosting environment: Development
+2025-03-05 15:11:34.242 +02:00 [INF] Content root path: /Users/aymanyassien/hotel-room_solution/hotel-room_api
+2025-03-05 15:11:34.973 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/index.html - null null
+2025-03-05 15:11:35.197 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/index.html - 200 null text/html;charset=utf-8 225.0733ms
+2025-03-05 15:11:36.031 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/index.js - null null
+2025-03-05 15:11:36.036 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/index.js - 200 null application/javascript;charset=utf-8 6.9964ms
+2025-03-05 15:11:36.139 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/v1/swagger.json - null null
+2025-03-05 15:11:36.398 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 259.3264ms
+2025-03-05 15:11:48.619 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - application/json-patch+json 101
+2025-03-05 15:11:48.640 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-03-05 15:11:48.676 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 15:11:48.692 +02:00 [INF] Route matched with {action = "Register", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Register(hotel_room_api.Models.DTOs.InternalDTO.RegisterRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 15:11:48.940 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api) - Validation state: "Valid"
+2025-03-05 15:11:50.714 +02:00 [INF] Executed DbCommand (57ms) [Parameters=[@__userName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[Name], [i].[Password], [i].[Role], [i].[UserName]
+FROM [InternalUsers] AS [i]
+WHERE [i].[UserName] = @__userName_0
+2025-03-05 15:11:50.756 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.BadRequestObjectResult in 1811.7871ms.
+2025-03-05 15:11:50.768 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 15:11:50.854 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Register (hotel-room_api) in 2157.0285ms
+2025-03-05 15:11:50.856 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 15:11:50.892 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - 400 90 application/json; charset=utf-8 2273.6455ms
+2025-03-05 15:12:23.637 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/login - application/json-patch+json 65
+2025-03-05 15:12:23.666 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Login (hotel-room_api)'
+2025-03-05 15:12:23.681 +02:00 [INF] Route matched with {action = "Login", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Login(hotel_room_api.Models.DTOs.InternalDTO.LoginRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 15:12:23.699 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Login (hotel-room_api) - Validation state: "Valid"
+2025-03-05 15:12:23.860 +02:00 [INF] Executed DbCommand (38ms) [Parameters=[@__ToLower_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE LOWER([a].[UserName]) = @__ToLower_0
+2025-03-05 15:12:24.018 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Login (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.BadRequestObjectResult in 319.1275ms.
+2025-03-05 15:12:24.019 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 15:12:24.020 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Login (hotel-room_api) in 338.0405ms
+2025-03-05 15:12:24.020 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Login (hotel-room_api)'
+2025-03-05 15:12:24.020 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/login - 400 104 application/json; charset=utf-8 385.9361ms
+2025-03-05 15:19:26.280 +02:00 [INF] Application is shutting down...
+2025-03-05 15:19:33.039 +02:00 [INF] User profile is available. Using '/Users/aymanyassien/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-03-05 15:19:33.147 +02:00 [INF] Now listening on: http://localhost:5244
+2025-03-05 15:19:33.148 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-03-05 15:19:33.148 +02:00 [INF] Hosting environment: Development
+2025-03-05 15:19:33.148 +02:00 [INF] Content root path: /Users/aymanyassien/hotel-room_solution/hotel-room_api
+2025-03-05 15:19:33.712 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/index.html - null null
+2025-03-05 15:19:33.835 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/index.html - 200 null text/html;charset=utf-8 124.144ms
+2025-03-05 15:19:34.459 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/index.js - null null
+2025-03-05 15:19:34.471 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/index.js - 200 null application/javascript;charset=utf-8 12.8378ms
+2025-03-05 15:19:34.552 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/v1/swagger.json - null null
+2025-03-05 15:19:34.771 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 219.0944ms
+2025-03-05 15:19:58.319 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - application/json-patch+json 101
+2025-03-05 15:19:58.351 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-03-05 15:19:58.400 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 15:19:58.430 +02:00 [INF] Route matched with {action = "Register", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Register(hotel_room_api.Models.DTOs.InternalDTO.RegisterRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 15:19:58.699 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api) - Validation state: "Valid"
+2025-03-05 15:20:00.634 +02:00 [INF] Executed DbCommand (64ms) [Parameters=[@__userName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[Name], [i].[Password], [i].[Role], [i].[UserName]
+FROM [InternalUsers] AS [i]
+WHERE [i].[UserName] = @__userName_0
+2025-03-05 15:20:00.790 +02:00 [INF] Executed DbCommand (10ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2025-03-05 15:20:01.026 +02:00 [INF] Executed DbCommand (21ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 4000), @p8='?' (Size = 256), @p9='?' (Size = 256), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (Size = 4000), @p14='?' (DbType = Boolean), @p15='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [Name], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15);
+2025-03-05 15:20:01.085 +02:00 [INF] Executed DbCommand (38ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2025-03-05 15:20:01.094 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2025-03-05 15:20:01.130 +02:00 [INF] Executed DbCommand (18ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (Size = 4000), @p2='?' (Size = 256), @p3='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetRoles] ([Id], [ConcurrencyStamp], [Name], [NormalizedName])
+VALUES (@p0, @p1, @p2, @p3);
+2025-03-05 15:20:01.172 +02:00 [INF] Executed DbCommand (39ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2025-03-05 15:20:01.176 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (Size = 4000), @p2='?' (Size = 256), @p3='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetRoles] ([Id], [ConcurrencyStamp], [Name], [NormalizedName])
+VALUES (@p0, @p1, @p2, @p3);
+2025-03-05 15:20:01.191 +02:00 [INF] Executed DbCommand (6ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2025-03-05 15:20:01.243 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[@__p_0='?' (Size = 450), @__p_1='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[UserId], [a].[RoleId]
+FROM [AspNetUserRoles] AS [a]
+WHERE [a].[UserId] = @__p_0 AND [a].[RoleId] = @__p_1
+2025-03-05 15:20:01.247 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2025-03-05 15:20:01.276 +02:00 [INF] Executed DbCommand (17ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2025-03-05 15:20:01.349 +02:00 [INF] Executed DbCommand (26ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (Size = 450), @p17='?' (Size = 450), @p2='?' (DbType = Int32), @p3='?' (Size = 4000), @p18='?' (Size = 4000), @p4='?' (Size = 256), @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTimeOffset), @p8='?' (Size = 4000), @p9='?' (Size = 256), @p10='?' (Size = 256), @p11='?' (Size = 4000), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 4000), @p15='?' (DbType = Boolean), @p16='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AspNetUserRoles] ([RoleId], [UserId])
+VALUES (@p0, @p1);
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p2, [ConcurrencyStamp] = @p3, [Email] = @p4, [EmailConfirmed] = @p5, [LockoutEnabled] = @p6, [LockoutEnd] = @p7, [Name] = @p8, [NormalizedEmail] = @p9, [NormalizedUserName] = @p10, [PasswordHash] = @p11, [PhoneNumber] = @p12, [PhoneNumberConfirmed] = @p13, [SecurityStamp] = @p14, [TwoFactorEnabled] = @p15, [UserName] = @p16
+OUTPUT 1
+WHERE [Id] = @p17 AND [ConcurrencyStamp] = @p18;
+2025-03-05 15:20:01.384 +02:00 [INF] Executed DbCommand (11ms) [Parameters=[@__registerRequestDto_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__registerRequestDto_UserName_0
+2025-03-05 15:20:01.391 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 2687.3592ms.
+2025-03-05 15:20:01.403 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 15:20:01.493 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Register (hotel-room_api) in 3057.7946ms
+2025-03-05 15:20:01.494 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 15:20:01.514 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - 200 156 application/json; charset=utf-8 3202.5585ms
+2025-03-05 15:20:25.386 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/login - application/json-patch+json 66
+2025-03-05 15:20:25.402 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Login (hotel-room_api)'
+2025-03-05 15:20:25.409 +02:00 [INF] Route matched with {action = "Login", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Login(hotel_room_api.Models.DTOs.InternalDTO.LoginRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 15:20:25.418 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Login (hotel-room_api) - Validation state: "Valid"
+2025-03-05 15:20:25.507 +02:00 [INF] Executed DbCommand (22ms) [Parameters=[@__ToLower_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE LOWER([a].[UserName]) = @__ToLower_0
+2025-03-05 15:20:25.661 +02:00 [INF] Executed DbCommand (51ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-03-05 15:20:25.692 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Login (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 273.639ms.
+2025-03-05 15:20:25.692 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 15:20:25.695 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Login (hotel-room_api) in 285.9658ms
+2025-03-05 15:20:25.695 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Login (hotel-room_api)'
+2025-03-05 15:20:25.695 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/login - 200 432 application/json; charset=utf-8 309.783ms
+2025-03-05 15:27:38.234 +02:00 [INF] Application is shutting down...
+2025-03-05 15:39:13.493 +02:00 [INF] User profile is available. Using '/Users/aymanyassien/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-03-05 15:39:13.869 +02:00 [INF] Now listening on: http://localhost:5244
+2025-03-05 15:39:13.901 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-03-05 15:39:13.904 +02:00 [INF] Hosting environment: Development
+2025-03-05 15:39:13.904 +02:00 [INF] Content root path: /Users/aymanyassien/hotel-room_solution/hotel-room_api
+2025-03-05 15:39:15.346 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/index.html - null null
+2025-03-05 15:39:15.707 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/index.html - 200 null text/html;charset=utf-8 369.5899ms
+2025-03-05 15:39:16.680 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/index.js - null null
+2025-03-05 15:39:16.685 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/index.js - 200 null application/javascript;charset=utf-8 6.285ms
+2025-03-05 15:39:16.951 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/v1/swagger.json - null null
+2025-03-05 15:39:17.236 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 285.7057ms
+2025-03-05 15:40:47.516 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/login - application/json-patch+json 66
+2025-03-05 15:40:47.549 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-03-05 15:40:47.590 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Login (hotel-room_api)'
+2025-03-05 15:40:47.618 +02:00 [INF] Route matched with {action = "Login", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Login(hotel_room_api.Models.DTOs.InternalDTO.LoginRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 15:40:47.892 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Login (hotel-room_api) - Validation state: "Valid"
+2025-03-05 15:40:49.641 +02:00 [INF] Executed DbCommand (59ms) [Parameters=[@__ToLower_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE LOWER([a].[UserName]) = @__ToLower_0
+2025-03-05 15:40:49.875 +02:00 [INF] Executed DbCommand (27ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-03-05 15:40:49.920 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Login (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 2023.3356ms.
+2025-03-05 15:40:49.933 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 15:40:50.021 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Login (hotel-room_api) in 2398.1206ms
+2025-03-05 15:40:50.022 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Login (hotel-room_api)'
+2025-03-05 15:40:50.045 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/login - 200 391 application/json; charset=utf-8 2529.9917ms
+2025-03-05 15:41:34.894 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/Login - application/json; charset=utf-8 57
+2025-03-05 15:41:34.920 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Login (hotel-room_api)'
+2025-03-05 15:41:34.921 +02:00 [INF] Route matched with {action = "Login", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Login(hotel_room_api.Models.DTOs.InternalDTO.LoginRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 15:41:34.932 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Login (hotel-room_api) - Validation state: "Valid"
+2025-03-05 15:41:34.993 +02:00 [INF] Executed DbCommand (24ms) [Parameters=[@__ToLower_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE LOWER([a].[UserName]) = @__ToLower_0
+2025-03-05 15:41:35.064 +02:00 [INF] Executed DbCommand (6ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-03-05 15:41:35.066 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Login (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 133.7613ms.
+2025-03-05 15:41:35.066 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 15:41:35.067 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Login (hotel-room_api) in 145.3936ms
+2025-03-05 15:41:35.067 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Login (hotel-room_api)'
+2025-03-05 15:41:35.067 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/Login - 200 391 application/json; charset=utf-8 174.5563ms
+2025-03-05 15:41:35.181 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/api/RoomApi - null null
+2025-03-05 15:41:35.237 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 15:41:35.243 +02:00 [INF] Route matched with {action = "GetRooms", controller = "RoomApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] GetRooms(Int32, Int32) on controller hotel_room_api.Controllers.RoomApiController (hotel-room_api).
+2025-03-05 15:41:35.383 +02:00 [INF] Executing action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) - Validation state: "Valid"
+2025-03-05 15:41:35.385 +02:00 [INF] Get All Rooms :)
+2025-03-05 15:41:35.409 +02:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[Id], [r].[Amenity], [r].[Details], [r].[ImageUrl], [r].[Name], [r].[NumberOfBeds], [r].[Rate], [r].[SpaceByMiter], [r].[createdDate], [r].[updatedDate]
+FROM [Rooms] AS [r]
+2025-03-05 15:41:35.449 +02:00 [INF] Executed action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 65.6037ms.
+2025-03-05 15:41:35.449 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 15:41:35.459 +02:00 [INF] Executed action hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) in 215.7339ms
+2025-03-05 15:41:35.459 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 15:41:35.459 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/api/RoomApi - 200 3015 application/json; charset=utf-8 278.1512ms
+2025-03-05 15:41:43.195 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/api/RoomApi - null null
+2025-03-05 15:41:43.213 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 15:41:43.214 +02:00 [INF] Route matched with {action = "GetRooms", controller = "RoomApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] GetRooms(Int32, Int32) on controller hotel_room_api.Controllers.RoomApiController (hotel-room_api).
+2025-03-05 15:41:43.234 +02:00 [INF] Executing action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) - Validation state: "Valid"
+2025-03-05 15:41:43.234 +02:00 [INF] Get All Rooms :)
+2025-03-05 15:41:43.256 +02:00 [INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[Id], [r].[Amenity], [r].[Details], [r].[ImageUrl], [r].[Name], [r].[NumberOfBeds], [r].[Rate], [r].[SpaceByMiter], [r].[createdDate], [r].[updatedDate]
+FROM [Rooms] AS [r]
+2025-03-05 15:41:43.259 +02:00 [INF] Executed action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 25.584ms.
+2025-03-05 15:41:43.260 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 15:41:43.261 +02:00 [INF] Executed action hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) in 46.3011ms
+2025-03-05 15:41:43.261 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 15:41:43.261 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/api/RoomApi - 200 3015 application/json; charset=utf-8 65.8492ms
+2025-03-05 15:41:49.033 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/api/RoomApi - null null
+2025-03-05 15:41:49.036 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 15:41:49.037 +02:00 [INF] Route matched with {action = "GetRooms", controller = "RoomApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] GetRooms(Int32, Int32) on controller hotel_room_api.Controllers.RoomApiController (hotel-room_api).
+2025-03-05 15:41:49.052 +02:00 [INF] Executing action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) - Validation state: "Valid"
+2025-03-05 15:41:49.052 +02:00 [INF] Get All Rooms :)
+2025-03-05 15:41:49.068 +02:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[Id], [r].[Amenity], [r].[Details], [r].[ImageUrl], [r].[Name], [r].[NumberOfBeds], [r].[Rate], [r].[SpaceByMiter], [r].[createdDate], [r].[updatedDate]
+FROM [Rooms] AS [r]
+2025-03-05 15:41:49.073 +02:00 [INF] Executed action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 20.7511ms.
+2025-03-05 15:41:49.073 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 15:41:49.074 +02:00 [INF] Executed action hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) in 37.1938ms
+2025-03-05 15:41:49.074 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 15:41:49.074 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/api/RoomApi - 200 3015 application/json; charset=utf-8 41.4457ms
+2025-03-05 15:41:49.805 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/api/RoomApi - null null
+2025-03-05 15:41:49.807 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 15:41:49.807 +02:00 [INF] Route matched with {action = "GetRooms", controller = "RoomApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] GetRooms(Int32, Int32) on controller hotel_room_api.Controllers.RoomApiController (hotel-room_api).
+2025-03-05 15:41:49.810 +02:00 [INF] Executing action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) - Validation state: "Valid"
+2025-03-05 15:41:49.810 +02:00 [INF] Get All Rooms :)
+2025-03-05 15:41:49.816 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[Id], [r].[Amenity], [r].[Details], [r].[ImageUrl], [r].[Name], [r].[NumberOfBeds], [r].[Rate], [r].[SpaceByMiter], [r].[createdDate], [r].[updatedDate]
+FROM [Rooms] AS [r]
+2025-03-05 15:41:49.817 +02:00 [INF] Executed action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 7.2386ms.
+2025-03-05 15:41:49.818 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 15:41:49.818 +02:00 [INF] Executed action hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) in 10.8732ms
+2025-03-05 15:41:49.818 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 15:41:49.818 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/api/RoomApi - 200 3015 application/json; charset=utf-8 13.5002ms
+2025-03-05 15:41:51.315 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/api/RoomApi/1 - null null
+2025-03-05 15:41:51.317 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.RoomApiController.GetRoomById (hotel-room_api)'
+2025-03-05 15:41:51.324 +02:00 [INF] Route matched with {action = "GetRoomById", controller = "RoomApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] GetRoomById(Int32) on controller hotel_room_api.Controllers.RoomApiController (hotel-room_api).
+2025-03-05 15:41:51.328 +02:00 [INF] Executing action method hotel_room_api.Controllers.RoomApiController.GetRoomById (hotel-room_api) - Validation state: "Valid"
+2025-03-05 15:41:51.374 +02:00 [INF] Executed DbCommand (13ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[Id], [r].[Amenity], [r].[Details], [r].[ImageUrl], [r].[Name], [r].[NumberOfBeds], [r].[Rate], [r].[SpaceByMiter], [r].[createdDate], [r].[updatedDate]
+FROM [Rooms] AS [r]
+WHERE [r].[Id] = @__id_0
+2025-03-05 15:41:51.378 +02:00 [INF] Executed action method hotel_room_api.Controllers.RoomApiController.GetRoomById (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 49.8647ms.
+2025-03-05 15:41:51.379 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 15:41:51.379 +02:00 [INF] Executed action hotel_room_api.Controllers.RoomApiController.GetRoomById (hotel-room_api) in 54.5008ms
+2025-03-05 15:41:51.379 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.RoomApiController.GetRoomById (hotel-room_api)'
+2025-03-05 15:41:51.379 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/api/RoomApi/1 - 200 285 application/json; charset=utf-8 64.3695ms
+2025-03-05 15:41:54.765 +02:00 [INF] Request starting HTTP/1.1 PUT http://localhost:5244/api/RoomApi/1 - application/json; charset=utf-8 220
+2025-03-05 15:41:54.766 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.RoomApiController.UpdateRoom (hotel-room_api)'
+2025-03-05 15:41:54.771 +02:00 [INF] Route matched with {action = "UpdateRoom", controller = "RoomApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] UpdateRoom(Int32, hotel_room_api.Models.DTOs.RoomUpdateDTO) on controller hotel_room_api.Controllers.RoomApiController (hotel-room_api).
+2025-03-05 15:41:54.791 +02:00 [INF] Executing action method hotel_room_api.Controllers.RoomApiController.UpdateRoom (hotel-room_api) - Validation state: "Valid"
+2025-03-05 15:41:54.804 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[Id], [r].[Amenity], [r].[Details], [r].[ImageUrl], [r].[Name], [r].[NumberOfBeds], [r].[Rate], [r].[SpaceByMiter], [r].[createdDate], [r].[updatedDate]
+FROM [Rooms] AS [r]
+WHERE [r].[Id] = @__id_0
+2025-03-05 15:41:54.950 +02:00 [INF] Executed DbCommand (28ms) [Parameters=[@p9='?' (DbType = Int32), @p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (DbType = DateTime2), @p8='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Rooms] SET [Amenity] = @p0, [Details] = @p1, [ImageUrl] = @p2, [Name] = @p3, [NumberOfBeds] = @p4, [Rate] = @p5, [SpaceByMiter] = @p6, [createdDate] = @p7, [updatedDate] = @p8
+OUTPUT 1
+WHERE [Id] = @p9;
+2025-03-05 15:41:54.962 +02:00 [INF] Executed action method hotel_room_api.Controllers.RoomApiController.UpdateRoom (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 171.6042ms.
+2025-03-05 15:41:54.962 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 15:41:54.963 +02:00 [INF] Executed action hotel_room_api.Controllers.RoomApiController.UpdateRoom (hotel-room_api) in 191.5257ms
+2025-03-05 15:41:54.963 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.RoomApiController.UpdateRoom (hotel-room_api)'
+2025-03-05 15:41:54.963 +02:00 [INF] Request finished HTTP/1.1 PUT http://localhost:5244/api/RoomApi/1 - 200 70 application/json; charset=utf-8 197.5087ms
+2025-03-05 15:41:54.970 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/api/RoomApi - null null
+2025-03-05 15:41:54.971 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 15:41:54.971 +02:00 [INF] Route matched with {action = "GetRooms", controller = "RoomApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] GetRooms(Int32, Int32) on controller hotel_room_api.Controllers.RoomApiController (hotel-room_api).
+2025-03-05 15:41:54.971 +02:00 [INF] Executing action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) - Validation state: "Valid"
+2025-03-05 15:41:54.971 +02:00 [INF] Get All Rooms :)
+2025-03-05 15:41:54.974 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[Id], [r].[Amenity], [r].[Details], [r].[ImageUrl], [r].[Name], [r].[NumberOfBeds], [r].[Rate], [r].[SpaceByMiter], [r].[createdDate], [r].[updatedDate]
+FROM [Rooms] AS [r]
+2025-03-05 15:41:54.975 +02:00 [INF] Executed action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 3.4965ms.
+2025-03-05 15:41:54.975 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 15:41:54.975 +02:00 [INF] Executed action hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) in 4.4848ms
+2025-03-05 15:41:54.975 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 15:41:54.975 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/api/RoomApi - 200 3016 application/json; charset=utf-8 5.1106ms
+2025-03-05 15:42:21.580 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - application/json; charset=utf-8 78
+2025-03-05 15:42:21.591 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 15:42:21.606 +02:00 [INF] Route matched with {action = "Register", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Register(hotel_room_api.Models.DTOs.InternalDTO.RegisterRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 15:42:21.630 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api) - Validation state: "Valid"
+2025-03-05 15:42:21.663 +02:00 [INF] Executed DbCommand (13ms) [Parameters=[@__userName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[Name], [i].[Password], [i].[Role], [i].[UserName]
+FROM [InternalUsers] AS [i]
+WHERE [i].[UserName] = @__userName_0
+2025-03-05 15:42:21.672 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.BadRequestObjectResult in 42.0044ms.
+2025-03-05 15:42:21.673 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 15:42:21.673 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Register (hotel-room_api) in 66.5677ms
+2025-03-05 15:42:21.673 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 15:42:21.673 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - 400 93 application/json; charset=utf-8 96.7382ms
+2025-03-05 15:42:34.809 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - application/json; charset=utf-8 91
+2025-03-05 15:42:34.809 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 15:42:34.810 +02:00 [INF] Route matched with {action = "Register", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Register(hotel_room_api.Models.DTOs.InternalDTO.RegisterRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 15:42:34.811 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api) - Validation state: "Valid"
+2025-03-05 15:42:34.818 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[@__userName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[Name], [i].[Password], [i].[Role], [i].[UserName]
+FROM [InternalUsers] AS [i]
+WHERE [i].[UserName] = @__userName_0
+2025-03-05 15:42:34.921 +02:00 [INF] Executed DbCommand (9ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2025-03-05 15:42:34.982 +02:00 [INF] Executed DbCommand (16ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 4000), @p8='?' (Size = 256), @p9='?' (Size = 256), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (Size = 4000), @p14='?' (DbType = Boolean), @p15='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [Name], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15);
+2025-03-05 15:42:34.995 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2025-03-05 15:42:35.014 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2025-03-05 15:42:35.055 +02:00 [INF] Executed DbCommand (10ms) [Parameters=[@__p_0='?' (Size = 450), @__p_1='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[UserId], [a].[RoleId]
+FROM [AspNetUserRoles] AS [a]
+WHERE [a].[UserId] = @__p_0 AND [a].[RoleId] = @__p_1
+2025-03-05 15:42:35.061 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2025-03-05 15:42:35.074 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2025-03-05 15:42:35.124 +02:00 [INF] Executed DbCommand (10ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (Size = 450), @p17='?' (Size = 450), @p2='?' (DbType = Int32), @p3='?' (Size = 4000), @p18='?' (Size = 4000), @p4='?' (Size = 256), @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTimeOffset), @p8='?' (Size = 4000), @p9='?' (Size = 256), @p10='?' (Size = 256), @p11='?' (Size = 4000), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 4000), @p15='?' (DbType = Boolean), @p16='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AspNetUserRoles] ([RoleId], [UserId])
+VALUES (@p0, @p1);
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p2, [ConcurrencyStamp] = @p3, [Email] = @p4, [EmailConfirmed] = @p5, [LockoutEnabled] = @p6, [LockoutEnd] = @p7, [Name] = @p8, [NormalizedEmail] = @p9, [NormalizedUserName] = @p10, [PasswordHash] = @p11, [PhoneNumber] = @p12, [PhoneNumberConfirmed] = @p13, [SecurityStamp] = @p14, [TwoFactorEnabled] = @p15, [UserName] = @p16
+OUTPUT 1
+WHERE [Id] = @p17 AND [ConcurrencyStamp] = @p18;
+2025-03-05 15:42:35.145 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__registerRequestDto_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__registerRequestDto_UserName_0
+2025-03-05 15:42:35.145 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 333.7538ms.
+2025-03-05 15:42:35.145 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 15:42:35.145 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Register (hotel-room_api) in 335.405ms
+2025-03-05 15:42:35.145 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 15:42:35.145 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - 200 159 application/json; charset=utf-8 336.8809ms
+2025-03-05 15:42:35.146 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/Login - application/json; charset=utf-8 62
+2025-03-05 15:42:35.146 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Login (hotel-room_api)'
+2025-03-05 15:42:35.146 +02:00 [INF] Route matched with {action = "Login", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Login(hotel_room_api.Models.DTOs.InternalDTO.LoginRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 15:42:35.147 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Login (hotel-room_api) - Validation state: "Valid"
+2025-03-05 15:42:35.150 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__ToLower_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE LOWER([a].[UserName]) = @__ToLower_0
+2025-03-05 15:42:35.215 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-03-05 15:42:35.216 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Login (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 69.144ms.
+2025-03-05 15:42:35.216 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 15:42:35.216 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Login (hotel-room_api) in 69.8883ms
+2025-03-05 15:42:35.216 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Login (hotel-room_api)'
+2025-03-05 15:42:35.216 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/Login - 200 399 application/json; charset=utf-8 70.2594ms
+2025-03-05 23:42:56.202 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - application/json; charset=utf-8 85
+2025-03-05 23:42:56.219 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 23:42:56.225 +02:00 [INF] Route matched with {action = "Register", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Register(hotel_room_api.Models.DTOs.InternalDTO.RegisterRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 23:42:56.248 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api) - Validation state: "Valid"
+2025-03-05 23:42:56.422 +02:00 [INF] Executed DbCommand (14ms) [Parameters=[@__userName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[Name], [i].[Password], [i].[Role], [i].[UserName]
+FROM [InternalUsers] AS [i]
+WHERE [i].[UserName] = @__userName_0
+2025-03-05 23:42:56.430 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.BadRequestObjectResult in 181.3179ms.
+2025-03-05 23:42:56.431 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 23:42:56.433 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Register (hotel-room_api) in 207.1895ms
+2025-03-05 23:42:56.433 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 23:42:56.433 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - 400 93 application/json; charset=utf-8 234.0056ms
+2025-03-05 23:43:21.032 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - application/json; charset=utf-8 87
+2025-03-05 23:43:21.035 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 23:43:21.035 +02:00 [INF] Route matched with {action = "Register", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Register(hotel_room_api.Models.DTOs.InternalDTO.RegisterRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 23:43:21.042 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api) - Validation state: "Valid"
+2025-03-05 23:43:21.076 +02:00 [INF] Executed DbCommand (20ms) [Parameters=[@__userName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[Name], [i].[Password], [i].[Role], [i].[UserName]
+FROM [InternalUsers] AS [i]
+WHERE [i].[UserName] = @__userName_0
+2025-03-05 23:43:21.077 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.BadRequestObjectResult in 35.3913ms.
+2025-03-05 23:43:21.078 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 23:43:21.078 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Register (hotel-room_api) in 42.7499ms
+2025-03-05 23:43:21.079 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 23:43:21.079 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - 400 93 application/json; charset=utf-8 47.6504ms
+2025-03-05 23:44:01.181 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - application/json; charset=utf-8 89
+2025-03-05 23:44:01.185 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 23:44:01.186 +02:00 [INF] Route matched with {action = "Register", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Register(hotel_room_api.Models.DTOs.InternalDTO.RegisterRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 23:44:01.195 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api) - Validation state: "Valid"
+2025-03-05 23:44:01.225 +02:00 [INF] Executed DbCommand (18ms) [Parameters=[@__userName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[Name], [i].[Password], [i].[Role], [i].[UserName]
+FROM [InternalUsers] AS [i]
+WHERE [i].[UserName] = @__userName_0
+2025-03-05 23:44:01.303 +02:00 [INF] Executed DbCommand (7ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2025-03-05 23:44:01.339 +02:00 [INF] Executed DbCommand (21ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 4000), @p8='?' (Size = 256), @p9='?' (Size = 256), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (Size = 4000), @p14='?' (DbType = Boolean), @p15='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [Name], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15);
+2025-03-05 23:44:01.345 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2025-03-05 23:44:01.351 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2025-03-05 23:44:01.358 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__p_0='?' (Size = 450), @__p_1='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[UserId], [a].[RoleId]
+FROM [AspNetUserRoles] AS [a]
+WHERE [a].[UserId] = @__p_0 AND [a].[RoleId] = @__p_1
+2025-03-05 23:44:01.361 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2025-03-05 23:44:01.368 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2025-03-05 23:44:01.380 +02:00 [INF] Executed DbCommand (6ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (Size = 450), @p17='?' (Size = 450), @p2='?' (DbType = Int32), @p3='?' (Size = 4000), @p18='?' (Size = 4000), @p4='?' (Size = 256), @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTimeOffset), @p8='?' (Size = 4000), @p9='?' (Size = 256), @p10='?' (Size = 256), @p11='?' (Size = 4000), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 4000), @p15='?' (DbType = Boolean), @p16='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AspNetUserRoles] ([RoleId], [UserId])
+VALUES (@p0, @p1);
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p2, [ConcurrencyStamp] = @p3, [Email] = @p4, [EmailConfirmed] = @p5, [LockoutEnabled] = @p6, [LockoutEnd] = @p7, [Name] = @p8, [NormalizedEmail] = @p9, [NormalizedUserName] = @p10, [PasswordHash] = @p11, [PhoneNumber] = @p12, [PhoneNumberConfirmed] = @p13, [SecurityStamp] = @p14, [TwoFactorEnabled] = @p15, [UserName] = @p16
+OUTPUT 1
+WHERE [Id] = @p17 AND [ConcurrencyStamp] = @p18;
+2025-03-05 23:44:01.387 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__registerRequestDto_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__registerRequestDto_UserName_0
+2025-03-05 23:44:01.387 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 191.3326ms.
+2025-03-05 23:44:01.387 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 23:44:01.388 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Register (hotel-room_api) in 201.8005ms
+2025-03-05 23:44:01.388 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 23:44:01.388 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - 200 161 application/json; charset=utf-8 206.797ms
+2025-03-05 23:44:01.402 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/Login - application/json; charset=utf-8 54
+2025-03-05 23:44:01.402 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Login (hotel-room_api)'
+2025-03-05 23:44:01.402 +02:00 [INF] Route matched with {action = "Login", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Login(hotel_room_api.Models.DTOs.InternalDTO.LoginRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 23:44:01.403 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Login (hotel-room_api) - Validation state: "Valid"
+2025-03-05 23:44:01.410 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__ToLower_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE LOWER([a].[UserName]) = @__ToLower_0
+2025-03-05 23:44:01.478 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-03-05 23:44:01.481 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Login (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 77.7692ms.
+2025-03-05 23:44:01.481 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 23:44:01.481 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Login (hotel-room_api) in 79.0157ms
+2025-03-05 23:44:01.481 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Login (hotel-room_api)'
+2025-03-05 23:44:01.481 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/Login - 200 396 application/json; charset=utf-8 79.4357ms
+2025-03-05 23:44:01.526 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/api/RoomApi - null null
+2025-03-05 23:44:01.531 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 23:44:01.531 +02:00 [INF] Route matched with {action = "GetRooms", controller = "RoomApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] GetRooms(Int32, Int32) on controller hotel_room_api.Controllers.RoomApiController (hotel-room_api).
+2025-03-05 23:44:01.532 +02:00 [INF] Executing action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) - Validation state: "Valid"
+2025-03-05 23:44:01.532 +02:00 [INF] Get All Rooms :)
+2025-03-05 23:44:01.538 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[Id], [r].[Amenity], [r].[Details], [r].[ImageUrl], [r].[Name], [r].[NumberOfBeds], [r].[Rate], [r].[SpaceByMiter], [r].[createdDate], [r].[updatedDate]
+FROM [Rooms] AS [r]
+2025-03-05 23:44:01.542 +02:00 [INF] Executed action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 9.7852ms.
+2025-03-05 23:44:01.542 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 23:44:01.543 +02:00 [INF] Executed action hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) in 12.231ms
+2025-03-05 23:44:01.543 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 23:44:01.543 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/api/RoomApi - 200 3016 application/json; charset=utf-8 16.6495ms
+2025-03-05 23:44:41.181 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/Login - application/json; charset=utf-8 54
+2025-03-05 23:44:41.186 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Login (hotel-room_api)'
+2025-03-05 23:44:41.187 +02:00 [INF] Route matched with {action = "Login", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Login(hotel_room_api.Models.DTOs.InternalDTO.LoginRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 23:44:41.192 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Login (hotel-room_api) - Validation state: "Valid"
+2025-03-05 23:44:41.213 +02:00 [INF] Executed DbCommand (16ms) [Parameters=[@__ToLower_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE LOWER([a].[UserName]) = @__ToLower_0
+2025-03-05 23:44:41.283 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-03-05 23:44:41.284 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Login (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 92.6234ms.
+2025-03-05 23:44:41.285 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 23:44:41.285 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Login (hotel-room_api) in 98.1406ms
+2025-03-05 23:44:41.285 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Login (hotel-room_api)'
+2025-03-05 23:44:41.285 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/Login - 200 396 application/json; charset=utf-8 104.1314ms
+2025-03-05 23:44:41.293 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/api/RoomApi - null null
+2025-03-05 23:44:41.294 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 23:44:41.294 +02:00 [INF] Route matched with {action = "GetRooms", controller = "RoomApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] GetRooms(Int32, Int32) on controller hotel_room_api.Controllers.RoomApiController (hotel-room_api).
+2025-03-05 23:44:41.295 +02:00 [INF] Executing action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) - Validation state: "Valid"
+2025-03-05 23:44:41.295 +02:00 [INF] Get All Rooms :)
+2025-03-05 23:44:41.300 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[Id], [r].[Amenity], [r].[Details], [r].[ImageUrl], [r].[Name], [r].[NumberOfBeds], [r].[Rate], [r].[SpaceByMiter], [r].[createdDate], [r].[updatedDate]
+FROM [Rooms] AS [r]
+2025-03-05 23:44:41.300 +02:00 [INF] Executed action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 5.0323ms.
+2025-03-05 23:44:41.300 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 23:44:41.300 +02:00 [INF] Executed action hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) in 6.463ms
+2025-03-05 23:44:41.300 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 23:44:41.300 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/api/RoomApi - 200 3016 application/json; charset=utf-8 7.665ms
+2025-03-05 23:44:44.158 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/api/bedNumber - null null
+2025-03-05 23:44:44.159 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.BedNumberApi.GetBedNumbers (hotel-room_api)'
+2025-03-05 23:44:44.176 +02:00 [INF] Route matched with {action = "GetBedNumbers", controller = "BedNumberApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] GetBedNumbers() on controller hotel_room_api.Controllers.BedNumberApi (hotel-room_api).
+2025-03-05 23:44:44.180 +02:00 [INF] Executing action method hotel_room_api.Controllers.BedNumberApi.GetBedNumbers (hotel-room_api) - Validation state: "Valid"
+2025-03-05 23:44:44.215 +02:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-03-05 23:44:44.215 +02:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-03-05 23:44:44.250 +02:00 [INF] Executed DbCommand (7ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [b0].[bedNo], [b0].[CreatedDate], [b0].[RoomId], [b0].[UpdatedDate], [b0].[specialDetails], [r].[Id], [r].[Amenity], [r].[Details], [r].[ImageUrl], [r].[Name], [r].[NumberOfBeds], [r].[Rate], [r].[SpaceByMiter], [r].[createdDate], [r].[updatedDate]
+FROM (
+    SELECT [b].[bedNo], [b].[CreatedDate], [b].[RoomId], [b].[UpdatedDate], [b].[specialDetails]
+    FROM [BedNumbers] AS [b]
+    ORDER BY (SELECT 1)
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [b0]
+INNER JOIN [Rooms] AS [r] ON [b0].[RoomId] = [r].[Id]
+2025-03-05 23:44:44.269 +02:00 [INF] Executed action method hotel_room_api.Controllers.BedNumberApi.GetBedNumbers (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 89.6398ms.
+2025-03-05 23:44:44.270 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 23:44:44.284 +02:00 [INF] Executed action hotel_room_api.Controllers.BedNumberApi.GetBedNumbers (hotel-room_api) in 107.2477ms
+2025-03-05 23:44:44.284 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.BedNumberApi.GetBedNumbers (hotel-room_api)'
+2025-03-05 23:44:44.284 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/api/bedNumber - 200 919 application/json; charset=utf-8 126.3167ms
+2025-03-05 23:44:45.069 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/api/RoomApi - null null
+2025-03-05 23:44:45.071 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 23:44:45.071 +02:00 [INF] Route matched with {action = "GetRooms", controller = "RoomApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] GetRooms(Int32, Int32) on controller hotel_room_api.Controllers.RoomApiController (hotel-room_api).
+2025-03-05 23:44:45.072 +02:00 [INF] Executing action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) - Validation state: "Valid"
+2025-03-05 23:44:45.072 +02:00 [INF] Get All Rooms :)
+2025-03-05 23:44:45.077 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[Id], [r].[Amenity], [r].[Details], [r].[ImageUrl], [r].[Name], [r].[NumberOfBeds], [r].[Rate], [r].[SpaceByMiter], [r].[createdDate], [r].[updatedDate]
+FROM [Rooms] AS [r]
+2025-03-05 23:44:45.078 +02:00 [INF] Executed action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 5.8217ms.
+2025-03-05 23:44:45.078 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 23:44:45.078 +02:00 [INF] Executed action hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) in 7.7232ms
+2025-03-05 23:44:45.079 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 23:44:45.079 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/api/RoomApi - 200 3016 application/json; charset=utf-8 9.3727ms
+2025-03-05 23:44:46.380 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/api/RoomApi - null null
+2025-03-05 23:44:46.380 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 23:44:46.380 +02:00 [INF] Route matched with {action = "GetRooms", controller = "RoomApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] GetRooms(Int32, Int32) on controller hotel_room_api.Controllers.RoomApiController (hotel-room_api).
+2025-03-05 23:44:46.382 +02:00 [INF] Executing action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) - Validation state: "Valid"
+2025-03-05 23:44:46.382 +02:00 [INF] Get All Rooms :)
+2025-03-05 23:44:46.387 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[Id], [r].[Amenity], [r].[Details], [r].[ImageUrl], [r].[Name], [r].[NumberOfBeds], [r].[Rate], [r].[SpaceByMiter], [r].[createdDate], [r].[updatedDate]
+FROM [Rooms] AS [r]
+2025-03-05 23:44:46.388 +02:00 [INF] Executed action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 5.5793ms.
+2025-03-05 23:44:46.388 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 23:44:46.388 +02:00 [INF] Executed action hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) in 7.9757ms
+2025-03-05 23:44:46.388 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 23:44:46.389 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/api/RoomApi - 200 3016 application/json; charset=utf-8 9.0454ms
+2025-03-05 23:44:52.058 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/api/RoomApi - null null
+2025-03-05 23:44:52.060 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 23:44:52.061 +02:00 [INF] Route matched with {action = "GetRooms", controller = "RoomApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] GetRooms(Int32, Int32) on controller hotel_room_api.Controllers.RoomApiController (hotel-room_api).
+2025-03-05 23:44:52.063 +02:00 [INF] Executing action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) - Validation state: "Valid"
+2025-03-05 23:44:52.064 +02:00 [INF] Get All Rooms :)
+2025-03-05 23:44:52.073 +02:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[Id], [r].[Amenity], [r].[Details], [r].[ImageUrl], [r].[Name], [r].[NumberOfBeds], [r].[Rate], [r].[SpaceByMiter], [r].[createdDate], [r].[updatedDate]
+FROM [Rooms] AS [r]
+2025-03-05 23:44:52.074 +02:00 [INF] Executed action method hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 10.7534ms.
+2025-03-05 23:44:52.074 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 23:44:52.075 +02:00 [INF] Executed action hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api) in 14.1683ms
+2025-03-05 23:44:52.075 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.RoomApiController.GetRooms (hotel-room_api)'
+2025-03-05 23:44:52.075 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/api/RoomApi - 200 3016 application/json; charset=utf-8 17.5522ms
+2025-03-05 23:45:35.190 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/Login - application/json; charset=utf-8 49
+2025-03-05 23:45:35.193 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Login (hotel-room_api)'
+2025-03-05 23:45:35.194 +02:00 [INF] Route matched with {action = "Login", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Login(hotel_room_api.Models.DTOs.InternalDTO.LoginRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 23:45:35.201 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Login (hotel-room_api) - Validation state: "Valid"
+2025-03-05 23:45:35.226 +02:00 [INF] Executed DbCommand (18ms) [Parameters=[@__ToLower_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE LOWER([a].[UserName]) = @__ToLower_0
+2025-03-05 23:45:35.227 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Login (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.BadRequestObjectResult in 25.3892ms.
+2025-03-05 23:45:35.228 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 23:45:35.228 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Login (hotel-room_api) in 34.2772ms
+2025-03-05 23:45:35.228 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Login (hotel-room_api)'
+2025-03-05 23:45:35.228 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/Login - 400 104 application/json; charset=utf-8 38.6439ms
+2025-03-05 23:45:57.303 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - application/json; charset=utf-8 92
+2025-03-05 23:45:57.306 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 23:45:57.306 +02:00 [INF] Route matched with {action = "Register", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Register(hotel_room_api.Models.DTOs.InternalDTO.RegisterRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 23:45:57.307 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api) - Validation state: "Valid"
+2025-03-05 23:45:57.315 +02:00 [INF] Executed DbCommand (6ms) [Parameters=[@__userName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[Name], [i].[Password], [i].[Role], [i].[UserName]
+FROM [InternalUsers] AS [i]
+WHERE [i].[UserName] = @__userName_0
+2025-03-05 23:45:57.316 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.BadRequestObjectResult in 8.8853ms.
+2025-03-05 23:45:57.316 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 23:45:57.317 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Register (hotel-room_api) in 10.6689ms
+2025-03-05 23:45:57.317 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 23:45:57.317 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - 400 93 application/json; charset=utf-8 13.74ms
+2025-03-05 23:48:41.715 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - application/json-patch+json 100
+2025-03-05 23:48:41.727 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 23:48:41.729 +02:00 [INF] Route matched with {action = "Register", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Register(hotel_room_api.Models.DTOs.InternalDTO.RegisterRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 23:48:41.745 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api) - Validation state: "Valid"
+2025-03-05 23:48:41.795 +02:00 [INF] Executed DbCommand (29ms) [Parameters=[@__userName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[Name], [i].[Password], [i].[Role], [i].[UserName]
+FROM [InternalUsers] AS [i]
+WHERE [i].[UserName] = @__userName_0
+2025-03-05 23:48:41.796 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.BadRequestObjectResult in 50.6401ms.
+2025-03-05 23:48:41.797 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 23:48:41.798 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Register (hotel-room_api) in 68.7492ms
+2025-03-05 23:48:41.798 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 23:48:41.799 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - 400 93 application/json; charset=utf-8 84.7758ms
+2025-03-05 23:51:50.837 +02:00 [INF] Application is shutting down...
+2025-03-05 23:52:00.655 +02:00 [INF] User profile is available. Using '/Users/aymanyassien/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-03-05 23:52:00.801 +02:00 [INF] Now listening on: http://localhost:5244
+2025-03-05 23:52:00.803 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-03-05 23:52:00.803 +02:00 [INF] Hosting environment: Development
+2025-03-05 23:52:00.803 +02:00 [INF] Content root path: /Users/aymanyassien/hotel-room_solution/hotel-room_api
+2025-03-05 23:52:01.109 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/index.html - null null
+2025-03-05 23:52:01.245 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/index.html - 200 null text/html;charset=utf-8 138.3448ms
+2025-03-05 23:52:01.267 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/index.js - null null
+2025-03-05 23:52:01.270 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/index.js - 200 null application/javascript;charset=utf-8 3.5924ms
+2025-03-05 23:52:01.360 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/v1/swagger.json - null null
+2025-03-05 23:52:01.635 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 275.3524ms
+2025-03-05 23:52:29.783 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - application/json-patch+json 96
+2025-03-05 23:52:29.818 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-03-05 23:52:29.920 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 23:52:29.946 +02:00 [INF] Route matched with {action = "Register", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Register(hotel_room_api.Models.DTOs.InternalDTO.RegisterRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 23:52:30.282 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api) - Validation state: "Valid"
+2025-03-05 23:53:38.829 +02:00 [INF] User profile is available. Using '/Users/aymanyassien/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-03-05 23:53:39.036 +02:00 [INF] Now listening on: http://localhost:5244
+2025-03-05 23:53:39.038 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-03-05 23:53:39.038 +02:00 [INF] Hosting environment: Development
+2025-03-05 23:53:39.038 +02:00 [INF] Content root path: /Users/aymanyassien/hotel-room_solution/hotel-room_api
+2025-03-05 23:53:39.577 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/index.html - null null
+2025-03-05 23:53:39.686 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/index.html - 200 null text/html;charset=utf-8 111.5196ms
+2025-03-05 23:53:40.071 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/index.js - null null
+2025-03-05 23:53:40.076 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/index.js - 200 null application/javascript;charset=utf-8 6.4695ms
+2025-03-05 23:53:40.347 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5244/swagger/v1/swagger.json - null null
+2025-03-05 23:53:40.649 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5244/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 301.7282ms
+2025-03-05 23:53:53.177 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - application/json-patch+json 96
+2025-03-05 23:53:53.195 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-03-05 23:53:53.233 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 23:53:53.251 +02:00 [INF] Route matched with {action = "Register", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Register(hotel_room_api.Models.DTOs.InternalDTO.RegisterRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 23:53:53.493 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api) - Validation state: "Valid"
+2025-03-05 23:53:55.342 +02:00 [INF] Executed DbCommand (196ms) [Parameters=[@__userName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__userName_0
+2025-03-05 23:53:55.392 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2025-03-05 23:53:55.441 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.BadRequestObjectResult in 1943.9538ms.
+2025-03-05 23:53:55.453 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 23:53:55.536 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Register (hotel-room_api) in 2279.9255ms
+2025-03-05 23:53:55.537 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 23:53:55.559 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - 400 90 application/json; charset=utf-8 2383.3134ms
+2025-03-05 23:54:12.191 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - application/json-patch+json 97
+2025-03-05 23:54:12.209 +02:00 [INF] Executing endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 23:54:12.211 +02:00 [INF] Route matched with {action = "Register", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[hotel_room_api.Models.APIResponse]] Register(hotel_room_api.Models.DTOs.InternalDTO.RegisterRequestDTO) on controller hotel_room_api.Controllers.UsersController (hotel-room_api).
+2025-03-05 23:54:12.215 +02:00 [INF] Executing action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api) - Validation state: "Valid"
+2025-03-05 23:54:12.251 +02:00 [INF] Executed DbCommand (17ms) [Parameters=[@__userName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__userName_0
+2025-03-05 23:54:12.341 +02:00 [INF] Executed DbCommand (10ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2025-03-05 23:54:12.533 +02:00 [INF] Executed DbCommand (25ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 4000), @p8='?' (Size = 256), @p9='?' (Size = 256), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (Size = 4000), @p14='?' (DbType = Boolean), @p15='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [Name], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15);
+2025-03-05 23:54:12.548 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2025-03-05 23:54:12.561 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2025-03-05 23:54:12.605 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[@__p_0='?' (Size = 450), @__p_1='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[UserId], [a].[RoleId]
+FROM [AspNetUserRoles] AS [a]
+WHERE [a].[UserId] = @__p_0 AND [a].[RoleId] = @__p_1
+2025-03-05 23:54:12.610 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2025-03-05 23:54:12.625 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2025-03-05 23:54:12.681 +02:00 [INF] Executed DbCommand (9ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (Size = 450), @p17='?' (Size = 450), @p2='?' (DbType = Int32), @p3='?' (Size = 4000), @p18='?' (Size = 4000), @p4='?' (Size = 256), @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTimeOffset), @p8='?' (Size = 4000), @p9='?' (Size = 256), @p10='?' (Size = 256), @p11='?' (Size = 4000), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 4000), @p15='?' (DbType = Boolean), @p16='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AspNetUserRoles] ([RoleId], [UserId])
+VALUES (@p0, @p1);
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p2, [ConcurrencyStamp] = @p3, [Email] = @p4, [EmailConfirmed] = @p5, [LockoutEnabled] = @p6, [LockoutEnd] = @p7, [Name] = @p8, [NormalizedEmail] = @p9, [NormalizedUserName] = @p10, [PasswordHash] = @p11, [PhoneNumber] = @p12, [PhoneNumberConfirmed] = @p13, [SecurityStamp] = @p14, [TwoFactorEnabled] = @p15, [UserName] = @p16
+OUTPUT 1
+WHERE [Id] = @p17 AND [ConcurrencyStamp] = @p18;
+2025-03-05 23:54:12.705 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__registerRequestDto_UserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[UserName] = @__registerRequestDto_UserName_0
+2025-03-05 23:54:12.706 +02:00 [INF] Executed action method hotel_room_api.Controllers.UsersController.Register (hotel-room_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 490.81ms.
+2025-03-05 23:54:12.707 +02:00 [INF] Executing OkObjectResult, writing value of type 'hotel_room_api.Models.APIResponse'.
+2025-03-05 23:54:12.709 +02:00 [INF] Executed action hotel_room_api.Controllers.UsersController.Register (hotel-room_api) in 497.9509ms
+2025-03-05 23:54:12.709 +02:00 [INF] Executed endpoint 'hotel_room_api.Controllers.UsersController.Register (hotel-room_api)'
+2025-03-05 23:54:12.709 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5244/api/UserAuth/register - 200 152 application/json; charset=utf-8 518.0648ms
+2025-03-05 23:54:20.106 +02:00 [INF] Application is shutting down...

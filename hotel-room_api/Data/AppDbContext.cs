@@ -1,15 +1,19 @@
 using hotel_room_api.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace hotel_room_api.Data;
 
-public class AppDbContext : DbContext
+public class AppDbContext : IdentityDbContext<AppUser>
 {
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
         
     }
+
+    
+    public DbSet<AppUser> AppUsers { get; set; }
     public DbSet<Room> Rooms { get; set; }
     public DbSet<BedNumber> BedNumbers { get; set; }
     public DbSet<InternalUser> InternalUsers { get; set; }
@@ -17,6 +21,7 @@ public class AppDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
 
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Room>().HasData(
             new Room
             {

@@ -1,9 +1,11 @@
 using System.Text;
 using hotel_room_api;
 using hotel_room_api.Data;
+using hotel_room_api.Models;
 using hotel_room_api.Repository;
 using hotel_room_api.Repository.IRepository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -25,6 +27,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddResponseCaching();
 
@@ -115,5 +119,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
-
