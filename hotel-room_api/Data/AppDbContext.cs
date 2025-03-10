@@ -13,6 +13,7 @@ public class AppDbContext : IdentityDbContext<AppUser>
     }
 
     
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
     public DbSet<AppUser> AppUsers { get; set; }
     public DbSet<Room> Rooms { get; set; }
     public DbSet<BedNumber> BedNumbers { get; set; }

@@ -14,6 +14,7 @@ public class RoomCreateDTO
     public int SpaceByMiter { get; set; }
     public int NumberOfBeds { get; set; } 
     public string?  ImageUrl { get; set; }
+    public IFormFile?  Image { get; set; }
     public string  Amenity { get; set; }
 
 }

@@ -7,6 +7,13 @@ public static class StaticData
         GET, POST, PUT, DELETE, PATCH
         
     }
+    public enum ContentType
+    {
+        json,
+        MultipartFormData
+        
+    }
 
-    public static string SessionToken = "JWTToken";
+    public static string AccessToken = "JWTToken";
+    public static string RefreshToken = "RefToken";
 }

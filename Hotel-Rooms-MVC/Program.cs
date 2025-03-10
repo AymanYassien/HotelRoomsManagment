@@ -1,19 +1,23 @@
 using Hotel_Rooms_MVC.Services.IServices;
 using Hotel_Rooms_MVC.Services.Services;
+using Hotel_Rooms_MVC.Services.Services.Extenstions;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(u => u.Filters.Add(new AuthExceptionRedirection()));
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 builder.Services.AddHttpClient<IRoomService, RoomService>();
+builder.Services.AddHttpClient<IAuthService, authService>();
 builder.Services.AddHttpClient<IBedNumberService, BedRoomService>();
+
+builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<IBedNumberService, BedRoomService>();
-
-builder.Services.AddHttpClient<IAuthService, authService>();
 builder.Services.AddScoped<IAuthService, authService>();
+builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>

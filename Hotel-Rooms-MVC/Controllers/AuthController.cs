@@ -1,6 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using hotel_room_api;
+using Hotel_Rooms_MVC;
 using Hotel_Rooms_MVC.Models;
 using Hotel_Rooms_MVC.Services.IServices;
 using Microsoft.AspNetCore.Authentication;
@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
+using hotel_room_api;
 using RoomsUtility;
 
 namespace Hotel_Rooms_MVC.Controllers;
@@ -15,16 +16,17 @@ namespace Hotel_Rooms_MVC.Controllers;
 public class AuthController : Controller
 {
     private IAuthService _authService;
+    private readonly ITokenProvider _tokenProvider;
 
-    public AuthController(IAuthService authService)
+    public AuthController(IAuthService authService, ITokenProvider tokenProvider)
     {
         _authService = authService;
+        _tokenProvider = tokenProvider;
     }
 
     [HttpGet]
     public IActionResult Login(string returnUrl = null)
     {
-        
         ViewBag.ReturnUrl = returnUrl;
         return View(new LoginRequestDTO());
     }
@@ -36,21 +38,22 @@ public class AuthController : Controller
         APIResponse response = await _authService.LoginAsync<APIResponse>(loginRequestDto);
         if (response != null && response.IsSuccess)
         {
-            LoginResponseDTO loginResponseDto =
-                JsonConvert.DeserializeObject<LoginResponseDTO>(Convert.ToString(response.Result));
+            TokenDTO tokenDto =
+                JsonConvert.DeserializeObject<TokenDTO>(Convert.ToString(response.Result));
 
             var handler = new JwtSecurityTokenHandler();
-            var jwt = handler.ReadJwtToken(loginResponseDto.Token);
+            var jwt = handler.ReadJwtToken(tokenDto.AccessToken);
             
             var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
             
-            identity.AddClaim(new Claim(ClaimTypes.Name, loginResponseDto.User.UserName));
+            identity.AddClaim(new Claim(ClaimTypes.Name, jwt.Claims.FirstOrDefault(u => u.Type =="unique_name").Value));
             identity.AddClaim(new Claim(ClaimTypes.Role, jwt.Claims.FirstOrDefault(u => u.Type =="role" ).Value));
 
             var principal = new ClaimsPrincipal(identity);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
             
-            HttpContext.Session.SetString(StaticData.SessionToken, loginResponseDto.Token);
+            // HttpContext.Session.SetString(StaticData.AccessToken, tokenDto.AccessToken);
+            _tokenProvider.SetToken(tokenDto);
             
             if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
             {
@@ -82,23 +85,22 @@ public class AuthController : Controller
             if (loginResponse != null && loginResponse.IsSuccess)
             {
                 
-                LoginResponseDTO loginResponseDto =
-                    JsonConvert.DeserializeObject<LoginResponseDTO>(Convert.ToString(loginResponse.Result));
+                TokenDTO tokenDto =
+                    JsonConvert.DeserializeObject<TokenDTO>(Convert.ToString(loginResponse.Result));
 
                 var handler = new JwtSecurityTokenHandler();
-                var jwt = handler.ReadJwtToken(loginResponseDto.Token);
+                var jwt = handler.ReadJwtToken(tokenDto.AccessToken);
                 
                 var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
             
-                identity.AddClaim(new Claim(ClaimTypes.Name, loginResponseDto.User.UserName));
+                identity.AddClaim(new Claim(ClaimTypes.Name, jwt.Claims.FirstOrDefault(u => u.Type =="unique_name").Value));
                 identity.AddClaim(new Claim(ClaimTypes.Role, jwt.Claims.FirstOrDefault(u => u.Type =="role" ).Value));
 
                 var principal = new ClaimsPrincipal(identity);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-
                 
-                
-                HttpContext.Session.SetString(StaticData.SessionToken, loginResponseDto.Token);
+                _tokenProvider.SetToken(tokenDto);
+                //HttpContext.Session.SetString(StaticData.AccessToken, tokenDto.AccessToken);
 
                 if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                 {
@@ -119,9 +121,11 @@ public class AuthController : Controller
 
     public async Task<IActionResult> Logout()
     {
+        var token = _tokenProvider.GetToken();
         await HttpContext.SignOutAsync();
-        HttpContext.Session.SetString(StaticData.SessionToken, "");
-
+        _tokenProvider.ClearToken();
+        // HttpContext.Session.SetString(StaticData.AccessToken, "");
+        await _authService.LogoutAsync<APIResponse>(token);
         return RedirectToAction("Index", "Home");
     }
     

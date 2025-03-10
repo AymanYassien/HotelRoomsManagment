@@ -3,65 +3,63 @@ using RoomsUtility;
 
 namespace Hotel_Rooms_MVC.Services.Services;
 
-public class RoomService : BaseService, IRoomService
+public class RoomService : IRoomService
 {
-    private readonly IHttpClientFactory _clientFactory;
+
+    private readonly IBaseService _baseService;
     private string _roomUrl;
-    public RoomService(IHttpClientFactory httpClient, IConfiguration configuration) : base(httpClient)
+    public RoomService( IConfiguration configuration, IBaseService baseService)
     {
-        _clientFactory = httpClient;
+        _baseService = baseService;
         _roomUrl = configuration.GetValue<string>("ServiceUrls:RoomApi");
     }
 
-    public Task<T> AddAsync<T>(RoomCreateDTO Entity, string token)
+    public async Task<T> AddAsync<T>(RoomCreateDTO Entity)
     {
-        return SendAsync<T>(new ApiRequest()
+        return await _baseService.SendAsync<T>(new ApiRequest()
         {
             ApiType = StaticData.ApiTypes.POST,
             data = Entity,
             Url = _roomUrl + "/api/RoomApi",
-            token = token
+            ContentType = StaticData.ContentType.MultipartFormData
         });
     }
     
-    public Task<T> GetAllAsync<T>(string token)
+    public async Task<T> GetAllAsync<T>()
     {
-        return SendAsync<T>(new ApiRequest()
+        return await _baseService.SendAsync<T>(new ApiRequest()
         {
             ApiType = StaticData.ApiTypes.GET,
-            Url = _roomUrl + "/api/RoomApi",
-            token = token
+            Url = _roomUrl + "/api/RoomApi"
         });
     }
 
-    public Task<T> GetAsync<T>(int id, string token)
+    public async Task<T> GetAsync<T>(int id)
     {
-        return SendAsync<T>(new ApiRequest()
+        return await _baseService.SendAsync<T>(new ApiRequest()
         {
             ApiType = StaticData.ApiTypes.GET,
-            Url = _roomUrl + "/api/RoomApi/" + id,
-            token = token
+            Url = _roomUrl + "/api/RoomApi/" + id
         });
     }
 
-    public Task<T> UpdateAsync<T>(RoomUpdateDTO Entity, string token)
+    public async Task<T> UpdateAsync<T>(RoomUpdateDTO Entity)
     {
-        return SendAsync<T>(new ApiRequest()
+        return await _baseService.SendAsync<T>(new ApiRequest()
         {
             ApiType = StaticData.ApiTypes.PUT,
             data = Entity,
             Url = _roomUrl + "/api/RoomApi/" + Entity.Id,
-            token = token
+            ContentType = StaticData.ContentType.MultipartFormData
         });
     }
     
-    public Task<T> RemoveAsync<T>(int id, string token)
+    public async Task<T> RemoveAsync<T>(int id)
     {
-        return SendAsync<T>(new ApiRequest()
+        return await _baseService.SendAsync<T>(new ApiRequest()
         {
             ApiType = StaticData.ApiTypes.DELETE,
-            Url = _roomUrl + "/api/RoomApi/" + id,
-            token = token
+            Url = _roomUrl + "/api/RoomApi/" + id
         });
     }
 }

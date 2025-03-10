@@ -4,33 +4,46 @@ using RoomsUtility;
 
 namespace Hotel_Rooms_MVC.Services.Services;
 
-public class authService :BaseService, IAuthService
+public class authService : IAuthService
 {
-    private readonly IHttpClientFactory _clientFactory;
+
+    private readonly IBaseService _baseService;
     private string _userUrl;
-    public authService(IHttpClientFactory httpClient, IConfiguration configuration) : base(httpClient)
+    public authService( IConfiguration configuration, IBaseService baseService)
+
     {
-        _clientFactory = httpClient;
+        _baseService = baseService;
+
         _userUrl = configuration.GetValue<string>("ServiceUrls:RoomApi");
     }
 
-    public Task<T> LoginAsync<T>(LoginRequestDTO loginRequestDto)
+    public async Task<T> LoginAsync<T>(LoginRequestDTO loginRequestDto)
     {
-        return SendAsync<T>(new ApiRequest()
+        return await _baseService.SendAsync<T>(new ApiRequest()
         {
             ApiType = StaticData.ApiTypes.POST,
             data = loginRequestDto,
             Url = _userUrl + "/api/UserAuth/Login"
-        });
+        }, needBearer:false);
     }
 
-    public Task<T> RegisterAsync<T>(RegisterRequestDTO registerRequestDto)
+    public async Task<T> RegisterAsync<T>(RegisterRequestDTO registerRequestDto)
     {
-        return SendAsync<T>(new ApiRequest()
+        return await _baseService.SendAsync<T>(new ApiRequest()
         {
             ApiType = StaticData.ApiTypes.POST,
             data = registerRequestDto,
             Url = _userUrl + "/api/UserAuth/register"
-        });
+        }, needBearer:false);
+    }
+
+    public async Task<T> LogoutAsync<T>(TokenDTO tokenDto)
+    {
+        return await _baseService.SendAsync<T>(new ApiRequest()
+        {
+            ApiType = StaticData.ApiTypes.POST,
+            data = tokenDto,
+            Url = _userUrl + "/api/UserAuth/revoke"
+        }, needBearer:false);
     }
 }

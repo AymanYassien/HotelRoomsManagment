@@ -18,6 +18,7 @@ public class RoomCreateDTO
     [Required]
     public int NumberOfBeds { get; set; } 
     public string?  ImageUrl { get; set; }
+    public IFormFile?  Image { get; set; }
     [Required]
     public string  Amenity { get; set; }
 

@@ -38,7 +38,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-controller="BedNumber" asp-action="IndexBedNumber"><i class="fas fa-calendar-alt"></i> Rooms Number</a>
                             </li>
-                                @if (!string.IsNullOrEmpty(httpAcc.HttpContext.Session.GetString(StaticData.SessionToken))) 
+                                @if (!string.IsNullOrEmpty(httpAcc.HttpContext.Request.Cookies[StaticData.RefreshToken])) 
                                 {
                                     <li class="nav-item">
                                         <a class="nav-link text-white" asp-controller="Auth" asp-action="Logout"><i class="fas fa-sign-out-alt"></i> Logout</a>

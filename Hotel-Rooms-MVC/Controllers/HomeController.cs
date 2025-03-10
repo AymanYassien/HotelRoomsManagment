@@ -2,6 +2,7 @@ using System.Diagnostics;
 using hotel_room_api;
 using Microsoft.AspNetCore.Mvc;
 using Hotel_Rooms_MVC.Models;
+using Hotel_Rooms_MVC;
 using Hotel_Rooms_MVC.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
@@ -23,7 +24,7 @@ public class HomeController : Controller
     {
         List<RoomDTO> roomsList = new();
 
-        var response = await _RoomService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(StaticData.SessionToken));
+        var response = await _RoomService.GetAllAsync<APIResponse>();
         if (response != null && response.IsSuccess)
         {
             roomsList = JsonConvert.DeserializeObject<List<RoomDTO>>

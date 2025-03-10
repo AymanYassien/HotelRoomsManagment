@@ -6,12 +6,11 @@ using hotel_room_api.Models.DTOs.InternalDTO;
 using hotel_room_api.Repository.IRepository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
-using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Mvc;
+using System.IO;
 
 namespace hotel_room_api.Controllers;
 
-using Microsoft.AspNetCore.Mvc;
 
 // [Route("api/[controller]")]
 
@@ -33,14 +32,16 @@ using Microsoft.AspNetCore.Mvc;
 [ApiVersion("1.0")]
 public class RoomApiController : ControllerBase
 {
+    private readonly IWebHostEnvironment _hostingEnvironment;
     private readonly ILogger<RoomApiController> _logger;
     private readonly IRoomRepository _roomRepository;
     private readonly IMapper _mapper;
     
     protected APIResponse _response ;
     
-    public RoomApiController(ILogger<RoomApiController> logger, IRoomRepository roomRepository, IMapper mapper)
+    public RoomApiController(IWebHostEnvironment hostingEnvironment,ILogger<RoomApiController> logger, IRoomRepository roomRepository, IMapper mapper)
     {
+        _hostingEnvironment = hostingEnvironment;
         _logger = logger;
         _roomRepository = roomRepository;
         _mapper = mapper;
@@ -77,7 +78,7 @@ public class RoomApiController : ControllerBase
 
     
     // [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
-    [ResponseCache(Duration = 30)]
+    // [ResponseCache(Duration = 30)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -128,7 +129,7 @@ public class RoomApiController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [Authorize(Roles = "admin")] 
     [HttpPost]
-    public async Task<ActionResult<APIResponse>> AddNewRoom([FromBody] RoomCreateDTO roomDto)
+    public async Task<ActionResult<APIResponse>> AddNewRoom([FromForm] RoomCreateDTO roomDto)
     {
         try
         {
@@ -167,7 +168,17 @@ public class RoomApiController : ControllerBase
             // };
             
             await _roomRepository.AddAsync(model);
-            
+
+            if (roomDto.Image != null)
+            {
+                var (newImageUrl, newImageLocalPath) = await ImageHandler.SaveNewImageAsync(roomDto.Image,
+                    _hostingEnvironment.WebRootPath, HttpContext.Request.Scheme, HttpContext.Request.Host.Value,
+                    model.Id);
+                model.ImageUrl = newImageUrl;
+                model.ImageLocalPath = newImageLocalPath;
+            }
+
+            await _roomRepository.UpdateAsync(model);
             _response.StatusCode = HttpStatusCode.Created;
             _response.Result = _mapper.Map<RoomCreateDTO>(model);
             
@@ -209,8 +220,12 @@ public class RoomApiController : ControllerBase
                 _response.ErrorMessages = new List<string>(){$"Room with ID {id} is Not Founded"};
                 return NotFound(_response);
             }
-                
-            
+
+            if (room.ImageLocalPath != null)
+            {
+                await ImageHandler.DeleteImageAsync
+                    (room.ImageLocalPath, _hostingEnvironment.WebRootPath);
+            }
             await _roomRepository.RemoveAsync(room);
             
             _response.StatusCode = HttpStatusCode.NoContent;
@@ -231,7 +246,7 @@ public class RoomApiController : ControllerBase
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [Authorize(Roles = "admin")]
     [HttpPut("{id:int}")]
-    public async Task<ActionResult<APIResponse>> UpdateRoom(int id, [FromBody] RoomUpdateDTO roomDto)
+    public async Task<ActionResult<APIResponse>> UpdateRoom(int id, [FromForm] RoomUpdateDTO roomDto)
     {
         try{
             if (roomDto == null || roomDto.Id != id)
@@ -253,10 +268,8 @@ public class RoomApiController : ControllerBase
                 _response.ErrorMessages.Add($"Room with ID {id} is Not Exist");
                 return NotFound(_response);
             }
-
-
-            existingRoom = _mapper.Map<Room>(roomDto);
-
+            
+            
             // existingRoom.Amenity = roomDto.Amenity;
             // existingRoom.Details = roomDto.Details;
             // existingRoom.ImageUrl = roomDto.ImageUrl;
@@ -264,7 +277,34 @@ public class RoomApiController : ControllerBase
             // existingRoom.NumberOfBeds = roomDto.NumberOfBeds;
             // existingRoom.Rate = roomDto.Rate;
             // existingRoom.SpaceByMiter = roomDto.SpaceByMiter;
-
+            
+            //Delete old
+            // delete old + add new 
+            
+            await ImageHandler.DeleteImageAsync(
+                existingRoom.ImageLocalPath,
+                _hostingEnvironment.WebRootPath
+            );
+            
+            if (roomDto.Image == null)
+                {
+                    
+                    existingRoom = _mapper.Map<Room>(roomDto);
+                    existingRoom.ImageUrl = null;
+                    existingRoom.ImageLocalPath = null;
+                }
+            
+            if (roomDto.Image != null)
+                {
+                    var (newImageUrl, newImageLocalPath) = await ImageHandler.SaveNewImageAsync(roomDto.Image,
+                        _hostingEnvironment.WebRootPath, HttpContext.Request.Scheme, HttpContext.Request.Host.Value,
+                        existingRoom.Id);
+                    existingRoom = _mapper.Map<Room>(roomDto);
+                    existingRoom.ImageUrl = newImageUrl;
+                    existingRoom.ImageLocalPath = newImageLocalPath;
+                }
+            
+            
             await _roomRepository.UpdateAsync(existingRoom);
 
             _response.StatusCode = HttpStatusCode.NoContent;
@@ -360,6 +400,5 @@ public class RoomApiController : ControllerBase
             return _response;
         }
     }
-    
     
 }

@@ -9,3 +9,4 @@
 /Users/aymanyassien/hotel-room_solution/RoomsUtility/obj/Debug/net8.0/refint/RoomsUtility.dll
 /Users/aymanyassien/hotel-room_solution/RoomsUtility/obj/Debug/net8.0/RoomsUtility.pdb
 /Users/aymanyassien/hotel-room_solution/RoomsUtility/obj/Debug/net8.0/ref/RoomsUtility.dll
+/Users/aymanyassien/hotel-room_solution/RoomsUtility/obj/Debug/net8.0/RoomsUtility.sourcelink.json

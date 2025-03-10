@@ -66,7 +66,8 @@ builder.Services.AddAuthentication(x =>
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key)),
         ValidateIssuer = false,
-        ValidateAudience = false
+        ValidateAudience = false,
+        ClockSkew = TimeSpan.Zero
     };
 });
 
@@ -114,8 +115,25 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
+app.UseResponseCaching(); 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseExceptionHandler("/ErrorHandling/ProcessError");
+
 app.MapControllers();
+// ApplyPendingMigration();
 
 app.Run();
+
+void ApplyPendingMigration()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var _db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        if (_db.Database.GetPendingMigrations().Count() > 0)
+            _db.Database.Migrate();
+    }
+}

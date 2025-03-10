@@ -1,5 +1,7 @@
 using System.Net;
+using System.Reflection.Metadata;
 using hotel_room_api.Models;
+using hotel_room_api.Models.DTOs;
 using hotel_room_api.Models.DTOs.InternalDTO;
 using hotel_room_api.Repository.IRepository;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -23,8 +25,8 @@ public class UsersController : Controller
     [HttpPost("login")]
     public async Task<ActionResult<APIResponse>> Login([FromBody] LoginRequestDTO user)
     {
-        var LoginResponse = await _userRepository.Login(user);
-        if (LoginResponse.User == null || string.IsNullOrEmpty(LoginResponse.Token) )
+        var TokenDTO = await _userRepository.Login(user);
+        if (TokenDTO== null || string.IsNullOrEmpty(TokenDTO.AccessToken) )
         {
             _apiResponse.IsSuccess = false;
             _apiResponse.StatusCode = HttpStatusCode.BadRequest;
@@ -35,7 +37,7 @@ public class UsersController : Controller
         
         _apiResponse.IsSuccess = true;
         _apiResponse.StatusCode = HttpStatusCode.OK;
-        _apiResponse.Result = LoginResponse;
+        _apiResponse.Result = TokenDTO;
         return Ok(_apiResponse);
     }
     
@@ -78,6 +80,70 @@ public class UsersController : Controller
             _apiResponse.ErrorMessages = new List<string>() { e.Message };
             return BadRequest(_apiResponse);
         }
+    }
+    
+    [HttpPost("refresh")]
+    public async Task<ActionResult<APIResponse>> GetNewTokenByAccessToken([FromBody] TokenDTO tokenDto)
+    {
+        try
+        {
+            if (ModelState.IsValid)
+            {
+                var tokenDTOResponse = await _userRepository.RefreshAccessToken(tokenDto);
+                
+                if (string.IsNullOrEmpty(tokenDTOResponse?.AccessToken))
+                {
+                    _apiResponse.IsSuccess = false;
+                    _apiResponse.StatusCode = HttpStatusCode.BadRequest;
+                    _apiResponse.ErrorMessages = new List<string>() { "Token Invalid" };
+
+                    return BadRequest(_apiResponse);
+                }
+                _apiResponse.IsSuccess = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+                _apiResponse.Result = tokenDTOResponse;
+                return Ok(_apiResponse);
+            }
+            _apiResponse.IsSuccess = false;
+            _apiResponse.StatusCode = HttpStatusCode.BadRequest;
+            _apiResponse.ErrorMessages = new List<string>() { "Invalid Input " };
+
+            return BadRequest(_apiResponse);
+            
+        }
+        catch (Exception e)
+        {
+            _apiResponse.IsSuccess = false;
+            _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+            _apiResponse.ErrorMessages = new List<string>() { e.Message };
+            return BadRequest(_apiResponse);
+        }
+    }
+
+    [HttpPost("Revoke")]
+    public async Task<ActionResult<APIResponse>> RevokeRefreshToken([FromBody] TokenDTO tokenDto)
+    {
+            if (ModelState.IsValid)
+            {
+                await _userRepository.RevokeRefreshToken(tokenDto);
+                _apiResponse.IsSuccess = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+                return Ok(_apiResponse);
+
+            }
+            _apiResponse.IsSuccess = false;
+            _apiResponse.StatusCode = HttpStatusCode.BadRequest;
+            _apiResponse.Result= "Invalid input";
+
+            return BadRequest(_apiResponse);
+    }
+
+    
+    [Route("ping")]
+    [HttpGet]
+    public IActionResult TestErrorHandler()
+    {
+        throw new FileNotFoundException();
     }
 }
 

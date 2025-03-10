@@ -1,80 +1,67 @@
 @model RoomDTO
 
-<title>Delete Room </title>
+@{
+    ViewData["Title"] = "Delete Room";
+}
 
-<!-- Main Content -->
 <div class="container">
     <div class="border">
         <h1>Delete Room</h1>
-        <form asp-action="DeleteRoom"  >
+        <form asp-action="DeleteRoom" method="post" id="deleteForm">
             <div class="row">
-                <input hidden asp-for="Id"/>
+                <input hidden asp-for="Id" />
                 <div class="col-md-6">
-                    <!-- Left column fields -->
                     <div class="mb-4">
-                        <label asp-for="Name" class="form-label fw-bold">Room Name</label>
-                        <input asp-for="Name" disabled type="text" class="form-control" id="name" placeholder="e.g. Deluxe Ocean View" required>
+                        <label asp-for="Name" class="form-label fw-bold"></label>
+                        <input asp-for="Name" disabled type="text" class="form-control" />
                     </div>
-        
                     <div class="mb-4">
-                        <label asp-for="Rate" class="form-label fw-bold">Rate Per Night</label>
+                        <label asp-for="Rate" class="form-label fw-bold"></label>
                         <div class="input-group">
                             <span class="input-group-text">SAR</span>
-                            <input type="number" disabled asp-for="Rate" class="form-control" id="rate"  min="0" step="0.01" placeholder="149.99" required>
+                            <input asp-for="Rate" disabled type="number" class="form-control" />
                         </div>
                     </div>
-        
                     <div class="mb-4">
-                        <label asp-for="SpaceByMiter" class="form-label fw-bold">Room Size</label>
+                        <label asp-for="SpaceByMiter" class="form-label fw-bold"></label>
                         <div class="input-group">
-                            <input type="number" disabled class="form-control" id="spaceByMeter" asp-for="SpaceByMiter" min="1" placeholder="32" required>
+                            <input asp-for="SpaceByMiter" disabled type="number" class="form-control" />
                             <span class="input-group-text">m²</span>
                         </div>
-                        <small class="form-text text-muted">Enter room size in square meters</small>
                     </div>
                 </div>
-        
-        
                 <div class="col-md-6">
-                    <!-- Right column fields -->
                     <div class="mb-4">
-                        <label asp-for="NumberOfBeds" class="form-label fw-bold">Number of Beds</label>
+                        <label asp-for="NumberOfBeds" class="form-label fw-bold"></label>
                         <div class="input-group">
-                            <input type="number" disabled class="form-control" id="numberOfBeds" asp-for="NumberOfBeds" min="1" max="6" placeholder="2" required>
+                            <input asp-for="NumberOfBeds" disabled type="number" class="form-control" />
                             <span class="input-group-text"><i class="fas fa-bed"></i></span>
                         </div>
                     </div>
-                    
                     <div class="mb-4">
-                        <label asp-for="ImageUrl" class="form-label fw-bold">Image Url</label>
-                        <input type="text" disabled class="form-control" id="ImageUrl" asp-for="ImageUrl" placeholder="" >
+                        <label asp-for="ImageUrl" class="form-label fw-bold"></label>
+                        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                        {
+                            <img src="@Model.ImageUrl" alt="Room Image" class="img-fluid mb-2" style="max-height: 150px; border-radius: var(--border-radius); box-shadow: var(--soft-shadow);" />
+                            <input asp-for="ImageUrl" disabled type="text" class="form-control" />
+                        }
+                        else
+                        {
+                            <input asp-for="ImageUrl" disabled type="text" class="form-control" placeholder="No image available" />
+                        }
                     </div>
                     <div class="mb-4">
-                        <label asp-for="Amenity" class="form-label fw-bold">Amenities</label>
-                        <input type="text" disabled class="form-control" id="amenity" asp-for="Amenity" placeholder="WiFi, TV, Mini-bar, Ocean View" required>
-                        <small class="form-text text-muted">Separate multiple amenities with commas</small>
+                        <label asp-for="Amenity" class="form-label fw-bold"></label>
+                        <input asp-for="Amenity" disabled type="text" class="form-control" />
                     </div>
-                    
-                    
-        
-                    @* <div class="mb-4"> *@
-                    @*     <label for="imageUpload" class="form-label fw-bold">Room Image</label> *@
-                    @*     <input type="file" class="form-control" id="imageUpload" name="ImageFile" accept="image/*"> *@
-                    @*     <span asp-validation-for="ImageUrl" class="text-danger"></span> *@
-                    @*     <small class="form-text text-muted">Recommended size: 1200×800px</small> *@
-                    @* </div> *@
                 </div>
-        
             </div>
-        
             <div class="mb-4">
-                <label asp-for="Details" class="form-label fw-bold">Room Details</label>
-                <textarea class="form-control" disabled id="details" asp-for="Details" rows="4" placeholder="Describe the room features, view, and other important details..." required></textarea>
+                <label asp-for="Details" class="form-label fw-bold"></label>
+                <textarea asp-for="Details" disabled class="form-control" rows="4"></textarea>
             </div>
-        
-        
             <div class="d-flex mt-5">
-                <button type="submit" value="Delete" class="btn btn-danger">
+                <button type="submit" class="btn btn-danger" id="deleteButton">
                     <i class="fas fa-minus-circle"></i> Delete Room
                 </button>
                 <a asp-action="IndexRoom" asp-controller="Room" class="btn btn-outline-primary ms-3">
@@ -82,14 +69,28 @@
                 </a>
             </div>
         </form>
-        
- 
-                        
-        @section Scripts {
-            <partial name="_ValidationScriptsPartial"/>
-        }
     </div>
 </div>
 
-
-    
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.getElementById('deleteForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'This action will permanently delete the room!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ef4444',
+                cancelButtonColor: '#3b82f6',
+                confirmButtonText: '<i class="fas fa-trash"></i> Yes, delete it!',
+                cancelButtonText: '<i class="fas fa-times"></i> Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            });
+        });
+    </script>
+}

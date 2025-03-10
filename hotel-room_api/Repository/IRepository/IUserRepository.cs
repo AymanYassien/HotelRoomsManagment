@@ -7,9 +7,12 @@ namespace hotel_room_api.Repository.IRepository;
 public interface IUserRepository
 {
     Task<bool> IsUniqueUserName(string userName);
-    Task<IdentityLoginResponseDTO> Login(LoginRequestDTO loginRequestDto);
-    Task<LoginResponseDTO> LoginHardWay(LoginRequestDTO loginRequestDto);
+    Task<TokenDTO> Login(LoginRequestDTO loginRequestDto);
     Task<IdentityUserDto> Register(RegisterRequestDTO registerRequestDto);
+    
+    Task<TokenDTO> RefreshAccessToken(TokenDTO TokenDto);
+    Task RevokeRefreshToken(TokenDTO TokenDto);
+    Task<InternalTokenDTO> LoginHardWay(LoginRequestDTO loginRequestDto);
     Task<InternalUser> RegisterHardWay(RegisterRequestDTO registerRequestDto);
 
 

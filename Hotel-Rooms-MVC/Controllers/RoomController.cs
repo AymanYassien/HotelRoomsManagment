@@ -1,4 +1,5 @@
 using hotel_room_api;
+using Hotel_Rooms_MVC;
 using Hotel_Rooms_MVC.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +22,7 @@ public class RoomController : Controller
     {
         List<RoomDTO> roomsList = new();
 
-        var response = await _RoomService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(StaticData.SessionToken));
+        var response = await _RoomService.GetAllAsync<APIResponse>();
         if (response != null && response.IsSuccess)
         {
             roomsList = JsonConvert.DeserializeObject<List<RoomDTO>>
@@ -43,7 +44,7 @@ public class RoomController : Controller
     {
         if (ModelState.IsValid)
         {
-            var response = await _RoomService.AddAsync<APIResponse>(newRoomDto, HttpContext.Session.GetString(StaticData.SessionToken));
+            var response = await _RoomService.AddAsync<APIResponse>(newRoomDto);
             if (response != null && response.IsSuccess)
             {
                 TempData["success"] = "Room Added Successfully";
@@ -56,7 +57,7 @@ public class RoomController : Controller
     
     public async Task<IActionResult> UpdateRoom(int id)
     {
-        var response = await _RoomService.GetAsync<APIResponse>(id, HttpContext.Session.GetString(StaticData.SessionToken));
+        var response = await _RoomService.GetAsync<APIResponse>(id);
         if (response != null && response.IsSuccess)
         {
             RoomDTO room = JsonConvert.DeserializeObject<RoomDTO>(Convert.ToString(response.Result));
@@ -84,7 +85,7 @@ public class RoomController : Controller
     {
         if (ModelState.IsValid)
         {
-            var response = await _RoomService.UpdateAsync<APIResponse>(updateRoom, HttpContext.Session.GetString(StaticData.SessionToken));
+            var response = await _RoomService.UpdateAsync<APIResponse>(updateRoom);
             if (response != null && response.IsSuccess)
             {
                 TempData["success"] = "Room Updated Successfully";
@@ -97,7 +98,7 @@ public class RoomController : Controller
     
     public async Task<IActionResult> DeleteRoom(int id)
     {
-        var response = await _RoomService.GetAsync<APIResponse>(id, HttpContext.Session.GetString(StaticData.SessionToken));
+        var response = await _RoomService.GetAsync<APIResponse>(id);
         if (response != null && response.IsSuccess)
         {
             RoomDTO room = JsonConvert.DeserializeObject<RoomDTO>(Convert.ToString(response.Result));
@@ -112,7 +113,7 @@ public class RoomController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteRoom( RoomDTO room)
     {
-        var response = await _RoomService.RemoveAsync<APIResponse>(room.Id, HttpContext.Session.GetString(StaticData.SessionToken));
+        var response = await _RoomService.RemoveAsync<APIResponse>(room.Id);
         if (response != null && response.IsSuccess)
         {
             TempData["success"] = "Room Deleted Successfully";

@@ -1,4 +1,5 @@
 using hotel_room_api;
+using Hotel_Rooms_MVC;
 using Hotel_Rooms_MVC.Models.ViewModel;
 using Hotel_Rooms_MVC.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
@@ -25,7 +26,7 @@ public class BedNumber : Controller
     {
         List<BedNumberDTO> BedNumbersList = new();
 
-        var response = await _BedNumberService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(StaticData.SessionToken));
+        var response = await _BedNumberService.GetAllAsync<APIResponse>();
         if (response != null && response.IsSuccess)
         {
             BedNumbersList = JsonConvert.DeserializeObject<List<BedNumberDTO>>
@@ -35,12 +36,10 @@ public class BedNumber : Controller
         return View(BedNumbersList);
     }
     
-    
-    
     public async Task<IActionResult> AddNewBedNumber()
     {
         bedNumberAddVM bedNumberAddVm = new();
-        var response = await _RoomService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(StaticData.SessionToken));
+        var response = await _RoomService.GetAllAsync<APIResponse>();
         if (response != null && response.IsSuccess)
         {
             bedNumberAddVm.RoomListItems = JsonConvert.DeserializeObject<List<RoomDTO>>
@@ -61,7 +60,7 @@ public class BedNumber : Controller
     {
         if (ModelState.IsValid)
         {
-            APIResponse response = await _BedNumberService.AddAsync<APIResponse>(newbedNumberAddVM.BedNumberAddDto, HttpContext.Session.GetString(StaticData.SessionToken));
+            APIResponse response = await _BedNumberService.AddAsync<APIResponse>(newbedNumberAddVM.BedNumberAddDto);
             if (response != null && response.IsSuccess)
             {
                 TempData["success"] = "Bed Number Added Successfully";
@@ -75,7 +74,7 @@ public class BedNumber : Controller
                 }
             }
         }
-        var res = await _RoomService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(StaticData.SessionToken));
+        var res = await _RoomService.GetAllAsync<APIResponse>();
         if (res != null && res.IsSuccess)
         {
             newbedNumberAddVM.RoomListItems = JsonConvert.DeserializeObject<List<RoomDTO>>
@@ -85,8 +84,12 @@ public class BedNumber : Controller
                 Value = i.Id.ToString()
             });
         }
+        else
+        {
+            TempData["error"] = (res?.ErrorMessages.Count() > 0) ? 
+                res.ErrorMessages[0] : "Error Encountered";
+        }
         
-        TempData["error"] = "Error When Create";
         return View(newbedNumberAddVM);
     }
     
@@ -95,8 +98,8 @@ public class BedNumber : Controller
     public async Task<IActionResult> UpdateBedNumber(int id)
     {
         bedNumberUpdateModel bedNumberUpdateVm = new();
-        var response = await _RoomService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(StaticData.SessionToken));
-        var bedNumberResponse =await _BedNumberService.GetAsync<APIResponse>(id, HttpContext.Session.GetString(StaticData.SessionToken));
+        var bedNumberResponse =await _BedNumberService.GetAsync<APIResponse>(id);
+        var response = await _RoomService.GetAllAsync<APIResponse>();
         
         if (bedNumberResponse != null && response != null && response.IsSuccess)
         {
@@ -126,8 +129,8 @@ public class BedNumber : Controller
     {
         if (ModelState.IsValid)
         {
-            var bedNumberResponse = _BedNumberService.GetAsync<APIResponse>(updatedBed.BedNumberUpdateDto.bedNo, HttpContext.Session.GetString(StaticData.SessionToken));
-            APIResponse response = await _BedNumberService.UpdateAsync<APIResponse>(updatedBed.BedNumberUpdateDto, HttpContext.Session.GetString(StaticData.SessionToken));
+            var bedNumberResponse = _BedNumberService.GetAsync<APIResponse>(updatedBed.BedNumberUpdateDto.bedNo);
+            APIResponse response = await _BedNumberService.UpdateAsync<APIResponse>(updatedBed.BedNumberUpdateDto);
             if (response != null && response.IsSuccess)
             {
                 TempData["success"] = "Bed Number Updated Successfully";
@@ -143,7 +146,7 @@ public class BedNumber : Controller
             }
         }
         
-        var res = await _RoomService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(StaticData.SessionToken));
+        var res = await _RoomService.GetAllAsync<APIResponse>();
         if (res != null && res.IsSuccess)
         {
             updatedBed.RoomListItems = JsonConvert.DeserializeObject<List<RoomDTO>>
@@ -162,8 +165,8 @@ public class BedNumber : Controller
     public async Task<IActionResult> DeleteBedNumber(int id)
     {
         bedNumberModel bedNumberVm = new();
-        var response = await _RoomService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(StaticData.SessionToken));
-        var bedNumberResponse =await _BedNumberService.GetAsync<APIResponse>(id, HttpContext.Session.GetString(StaticData.SessionToken));
+        var response = await _RoomService.GetAllAsync<APIResponse>();
+        var bedNumberResponse =await _BedNumberService.GetAsync<APIResponse>(id);
         
         if (bedNumberResponse != null && response != null && response.IsSuccess)
         {
@@ -182,6 +185,11 @@ public class BedNumber : Controller
                 RoomId = model.RoomId
             };
         }
+        else
+        {
+            TempData["error"] = (response?.ErrorMessages.Count() > 0) ? 
+                response.ErrorMessages[0] : "Error Encountered";
+        }
 
         return View(bedNumberVm);
     }
@@ -191,13 +199,18 @@ public class BedNumber : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteBedNumber( bedNumberModel deletedBed)
     {
-        var response = await _BedNumberService.RemoveAsync<APIResponse>(deletedBed.BedNumberDto.bedNo, HttpContext.Session.GetString(StaticData.SessionToken));
+        var response = await _BedNumberService.RemoveAsync<APIResponse>(deletedBed.BedNumberDto.bedNo);
         if (response != null && response.IsSuccess)
         {
             TempData["success"] = "Bed Number Deleted Successfully";
             return RedirectToAction(nameof(IndexBedNumber));
         }
-        TempData["error"] = "Error When Delete";   
+        else
+        {
+            TempData["error"] = (response?.ErrorMessages.Count() > 0) ? 
+                response.ErrorMessages[0] : "Error Encountered";
+        }
+        
         return View(deletedBed);
         
     }
