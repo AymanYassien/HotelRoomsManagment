@@ -77,7 +77,7 @@ dotnet ef database update
 # Run the application
 dotnet run
 
-
+```
 ---
 ## 📂 Project Structure
 
