@@ -52,19 +52,31 @@ The system uses **JWT authentication with refresh tokens**, where access tokens 
 ---
 ## 🚀 Getting Started
 
-🖥️ Prerequisites
-.NET 8 SDK
+### 🖥️ Prerequisites
 
-SQL Server or SQL Server LocalDB
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- SQL Server or SQL Server LocalDB installed and running
 
-## 📥 Clone & Run
+---
 
-// Run.Bash
+### 📥 Clone & Run
+
+```bash
+# Clone the repository
 git clone https://github.com/your-username/RoomManagementSystem.git
+
+# Navigate into the project folder
 cd RoomManagementSystem
+
+# Restore NuGet packages
 dotnet restore
+
+# Apply database migrations
 dotnet ef database update
+
+# Run the application
 dotnet run
+
 
 ---
 ## 📂 Project Structure
