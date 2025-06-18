@@ -101,4 +101,11 @@
     <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\LICENSE.txt" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="HeroImage.webp">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

@@ -124,7 +124,7 @@ public class UserRepository : IUserRepository
                 new Claim(JwtRegisteredClaimNames.Jti , jwtID),
                 new Claim(JwtRegisteredClaimNames.Sub , userIdentity.Id),
             }),
-            Expires = DateTime.UtcNow.AddMinutes(1),
+            Expires = DateTime.UtcNow.AddMinutes(100),
             SigningCredentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
         
@@ -194,7 +194,7 @@ public class UserRepository : IUserRepository
             UserId = userId,
             IsValid = true,
             JwtTokenId = tokenId,
-            ExpiredAt = DateTime.UtcNow.AddMinutes(2),
+            ExpiredAt = DateTime.UtcNow.AddMinutes(100),
             Refresh_Token = Guid.NewGuid() + "-" + Guid.NewGuid()
 
         };

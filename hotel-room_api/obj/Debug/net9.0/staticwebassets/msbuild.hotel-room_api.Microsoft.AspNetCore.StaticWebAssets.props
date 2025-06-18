@@ -1,5 +1,41 @@
 ﻿<Project>
   <ItemGroup>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\1cb45cc4-2963-4bb4-b801-46842d010e49_4.webp'))">
+      <SourceType>Package</SourceType>
+      <SourceId>hotel-room_api</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/hotel-room_api</BasePath>
+      <RelativePath>Images/1cb45cc4-2963-4bb4-b801-46842d010e49_4.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>xevxcqch76</Fingerprint>
+      <Integrity>t66JvK5K8knBsEJkVpW+/E0y/ACHLeUIe/YU6LktCr8=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\1cb45cc4-2963-4bb4-b801-46842d010e49_4.webp'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\a004d9bb-f9fe-428a-b69a-583a3417337d_2.webp'))">
+      <SourceType>Package</SourceType>
+      <SourceId>hotel-room_api</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/hotel-room_api</BasePath>
+      <RelativePath>Images/a004d9bb-f9fe-428a-b69a-583a3417337d_2.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>us7es5nqov</Fingerprint>
+      <Integrity>AiFC5iw6li+a1jFwkg5Gv+omLh45afSMzptfT6WBzfM=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\a004d9bb-f9fe-428a-b69a-583a3417337d_2.webp'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\Gym_breakfast.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>hotel-room_api</SourceId>

@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "/Users/aymanyassien/hotel-room_solution/hotel-room_api/wwwroot/Images/1cb45cc4-2963-4bb4-b801-46842d010e49_4.webp",
+      "PackagePath": "staticwebassets/Images/1cb45cc4-2963-4bb4-b801-46842d010e49_4.webp"
+    },
+    {
       "Id": "/Users/aymanyassien/hotel-room_solution/hotel-room_api/wwwroot/Images/Gym_breakfast.webp",
       "PackagePath": "staticwebassets/Images/Gym_breakfast.webp"
     },
@@ -23,6 +27,10 @@
     {
       "Id": "/Users/aymanyassien/hotel-room_solution/hotel-room_api/wwwroot/Images/Wifi.webp",
       "PackagePath": "staticwebassets/Images/Wifi.webp"
+    },
+    {
+      "Id": "/Users/aymanyassien/hotel-room_solution/hotel-room_api/wwwroot/Images/a004d9bb-f9fe-428a-b69a-583a3417337d_2.webp",
+      "PackagePath": "staticwebassets/Images/a004d9bb-f9fe-428a-b69a-583a3417337d_2.webp"
     },
     {
       "Id": "/Users/aymanyassien/hotel-room_solution/hotel-room_api/wwwroot/Images/pool-grat.webp",

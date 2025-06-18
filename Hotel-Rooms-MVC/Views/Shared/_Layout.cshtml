@@ -1,5 +1,6 @@
 ﻿@using RoomsUtility
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor httpAcc
 
 <!DOCTYPE html>
@@ -36,7 +37,7 @@
                                 <a class="nav-link text-white" asp-controller="Home" asp-action="Index"><i class="fas fa-door-open"></i> Rooms</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-controller="BedNumber" asp-action="IndexBedNumber"><i class="fas fa-calendar-alt"></i> Rooms Number</a>
+                                <a class="nav-link text-white" asp-controller="BedNumber" asp-action="IndexBedNumber"><i class="fas fa-calendar-alt"></i> Beds Number</a>
                             </li>
                                 @if (!string.IsNullOrEmpty(httpAcc.HttpContext.Request.Cookies[StaticData.RefreshToken])) 
                                 {

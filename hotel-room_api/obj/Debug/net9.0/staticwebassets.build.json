@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "YnVjDr36bauJcVXLrhiSKsuIrNWFV6rcxUbfF+xX2ew=",
+  "Hash": "+rOy5WRynI3y2hw/FLnnP/mIjLoGBsbZD9GawFcZZy4=",
   "Source": "hotel-room_api",
   "BasePath": "_content/hotel-room_api",
   "Mode": "Default",
@@ -16,6 +16,48 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "/Users/aymanyassien/hotel-room_solution/hotel-room_api/wwwroot/Images/1cb45cc4-2963-4bb4-b801-46842d010e49_4.webp",
+      "SourceId": "hotel-room_api",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/aymanyassien/hotel-room_solution/hotel-room_api/wwwroot/",
+      "BasePath": "_content/hotel-room_api",
+      "RelativePath": "Images/1cb45cc4-2963-4bb4-b801-46842d010e49_4#[.{fingerprint}]?.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "xevxcqch76",
+      "Integrity": "t66JvK5K8knBsEJkVpW+/E0y/ACHLeUIe/YU6LktCr8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/Images/1cb45cc4-2963-4bb4-b801-46842d010e49_4.webp"
+    },
+    {
+      "Identity": "/Users/aymanyassien/hotel-room_solution/hotel-room_api/wwwroot/Images/a004d9bb-f9fe-428a-b69a-583a3417337d_2.webp",
+      "SourceId": "hotel-room_api",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/aymanyassien/hotel-room_solution/hotel-room_api/wwwroot/",
+      "BasePath": "_content/hotel-room_api",
+      "RelativePath": "Images/a004d9bb-f9fe-428a-b69a-583a3417337d_2#[.{fingerprint}]?.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "us7es5nqov",
+      "Integrity": "AiFC5iw6li+a1jFwkg5Gv+omLh45afSMzptfT6WBzfM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/Images/a004d9bb-f9fe-428a-b69a-583a3417337d_2.webp"
+    },
     {
       "Identity": "/Users/aymanyassien/hotel-room_solution/hotel-room_api/wwwroot/Images/Gym_breakfast.webp",
       "SourceId": "hotel-room_api",
@@ -165,6 +207,170 @@
     }
   ],
   "Endpoints": [
+    {
+      "Route": "Images/1cb45cc4-2963-4bb4-b801-46842d010e49_4.webp",
+      "AssetFile": "/Users/aymanyassien/hotel-room_solution/hotel-room_api/wwwroot/Images/1cb45cc4-2963-4bb4-b801-46842d010e49_4.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "411688"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"t66JvK5K8knBsEJkVpW+/E0y/ACHLeUIe/YU6LktCr8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 18 Jun 2025 14:35:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-t66JvK5K8knBsEJkVpW+/E0y/ACHLeUIe/YU6LktCr8="
+        }
+      ]
+    },
+    {
+      "Route": "Images/1cb45cc4-2963-4bb4-b801-46842d010e49_4.xevxcqch76.webp",
+      "AssetFile": "/Users/aymanyassien/hotel-room_solution/hotel-room_api/wwwroot/Images/1cb45cc4-2963-4bb4-b801-46842d010e49_4.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "411688"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"t66JvK5K8knBsEJkVpW+/E0y/ACHLeUIe/YU6LktCr8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 18 Jun 2025 14:35:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "xevxcqch76"
+        },
+        {
+          "Name": "label",
+          "Value": "Images/1cb45cc4-2963-4bb4-b801-46842d010e49_4.webp"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-t66JvK5K8knBsEJkVpW+/E0y/ACHLeUIe/YU6LktCr8="
+        }
+      ]
+    },
+    {
+      "Route": "Images/a004d9bb-f9fe-428a-b69a-583a3417337d_2.us7es5nqov.webp",
+      "AssetFile": "/Users/aymanyassien/hotel-room_solution/hotel-room_api/wwwroot/Images/a004d9bb-f9fe-428a-b69a-583a3417337d_2.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "272458"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AiFC5iw6li+a1jFwkg5Gv+omLh45afSMzptfT6WBzfM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 18 Jun 2025 14:33:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "us7es5nqov"
+        },
+        {
+          "Name": "label",
+          "Value": "Images/a004d9bb-f9fe-428a-b69a-583a3417337d_2.webp"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-AiFC5iw6li+a1jFwkg5Gv+omLh45afSMzptfT6WBzfM="
+        }
+      ]
+    },
+    {
+      "Route": "Images/a004d9bb-f9fe-428a-b69a-583a3417337d_2.webp",
+      "AssetFile": "/Users/aymanyassien/hotel-room_solution/hotel-room_api/wwwroot/Images/a004d9bb-f9fe-428a-b69a-583a3417337d_2.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "272458"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AiFC5iw6li+a1jFwkg5Gv+omLh45afSMzptfT6WBzfM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 18 Jun 2025 14:33:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-AiFC5iw6li+a1jFwkg5Gv+omLh45afSMzptfT6WBzfM="
+        }
+      ]
+    },
     {
       "Route": "Images/Gym_breakfast.us7es5nqov.webp",
       "AssetFile": "/Users/aymanyassien/hotel-room_solution/hotel-room_api/wwwroot/Images/Gym_breakfast.webp",

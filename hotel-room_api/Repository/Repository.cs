@@ -14,7 +14,6 @@ public class Repository<T> : IRepository<T> where T: class
     public Repository(AppDbContext db)
     {
         _db = db;
-        // _db.BedNumbers.Include(b => b.Room).ToString();
         this._dbSet = _db.Set<T>();
     }
 
