@@ -100,4 +100,14 @@ RoomManagementSolution/           # Solution root folder
     ├── Entities/                # Core models like Room, Bed, ApplicationUser
     ├── Enums/                   # Role enums or constants
     └── Interfaces/              # Optional: Repository/service interfaces
+```
+---
+## App in Action
+
+<img width="1440" alt="api_1" src="https://github.com/user-attachments/assets/95b2336d-c6e2-4500-890a-70b025deaef8" />
+
+
+<img width="1440" alt="api_2" src="https://github.com/user-attachments/assets/9516bc8a-3df0-4f09-b88a-1bd916b4d9ba" />
+
+
 
