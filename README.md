@@ -63,7 +63,7 @@ The system uses **JWT authentication with refresh tokens**, where access tokens 
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/RoomManagementSystem.git
+git clone https://github.com/aymanyassien/RoomManagementSystem.git
 
 # Navigate into the project folder
 cd RoomManagementSystem
