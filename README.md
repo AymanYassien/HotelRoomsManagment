@@ -31,7 +31,8 @@ The system uses **JWT authentication with refresh tokens**, where access tokens 
 
 ---
 
-📦 Features
+## 📦 Features
+
 ✅ JWT + Refresh Token (cookie-based)
 
 ✅ ASP.NET Core Identity for user management
@@ -49,13 +50,14 @@ The system uses **JWT authentication with refresh tokens**, where access tokens 
 ✅ Secure MVC UI for both admin and user workflows
 
 ---
-🚀 Getting Started
+## 🚀 Getting Started
+
 🖥️ Prerequisites
 .NET 8 SDK
 
 SQL Server or SQL Server LocalDB
 
-📥 Clone & Run
+## 📥 Clone & Run
 
 // Run.Bash
 git clone https://github.com/your-username/RoomManagementSystem.git
@@ -65,23 +67,25 @@ dotnet ef database update
 dotnet run
 
 ---
-📂 Project Structure
+## 📂 Project Structure
 
-/RoomManagementSolution
-├── RoomManagement.API         # Web API (JWT Auth, Business Logic)
-│   ├── Controllers
-│   ├── Services
-│   ├── DTOs
-│   ├── Middleware
-│   └── JWT Config & Extensions
+```plaintext
+RoomManagementSolution/           # Solution root folder
+├── RoomManagement.API/          # ASP.NET Core Web API project (Backend services)
+│   ├── Controllers/             # API endpoints
+│   ├── DTOs/                    # Data Transfer Objects for requests/responses
+│   ├── Middleware/              # Custom error handling, JWT config
+│   ├── Services/                # Business logic and service layer
+│   └── Program.cs               # App bootstrap (entry point)
 │
-├── RoomManagement.MVC         # ASP.NET MVC (UI Layer)
-│   ├── Controllers
-│   ├── Views
-│   ├── Auth UI
-│   └── Role-specific Views
+├── RoomManagement.MVC/          # ASP.NET MVC project (Frontend)
+│   ├── Controllers/             # MVC controllers for views
+│   ├── Views/                   # Razor Views for Admin/User interfaces
+│   ├── wwwroot/                 # Static files (CSS, JS)
+│   └── Startup.cs               # MVC app configuration
 │
-└── RoomManagement.Domain      # Models & Identity
-    ├── Entities (Room, Bed)
-    ├── ApplicationUser.cs
-    └── Enums / DTOs
+└── RoomManagement.Domain/       # Domain layer (shared between API & MVC)
+    ├── Entities/                # Core models like Room, Bed, ApplicationUser
+    ├── Enums/                   # Role enums or constants
+    └── Interfaces/              # Optional: Repository/service interfaces
+
