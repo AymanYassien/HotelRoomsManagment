@@ -12,7 +12,7 @@ A full-stack Room Management system built using **ASP.NET Core 8**, leveraging a
 - **Authorization**: Role-based (`Admin`, `User`)  
 - **Tokens**: JWT + Refresh Token (stored in **cookies**)  
 - **Database**: SQL Server (LocalDB) using EF Core  
-- **Design Patterns**: Clean 3-tier separation, Generic API Responses  
+- **Design Patterns**: Clean separation, Generic API Responses  
 - **Extra Features**: Pagination, Centralized Error Handling
 
 ---
@@ -31,27 +31,57 @@ The system uses **JWT authentication with refresh tokens**, where access tokens 
 
 ---
 
-## 🏨 Domain Model Overview
+📦 Features
+✅ JWT + Refresh Token (cookie-based)
 
-**One-to-Many Relationship:**
-- A **Room** contains many **Beds**
-- Each **Bed** has a unique **Bed Number** within the room
+✅ ASP.NET Core Identity for user management
 
-### Sample Entities:
-```csharp
-// Room.cs
-public class Room
-{
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public ICollection<Bed> Beds { get; set; }
-}
+✅ Role-based Access Control (Admin/User)
 
-// Bed.cs
-public class Bed
-{
-    public int Id { get; set; }
-    public int Number { get; set; }
-    public int RoomId { get; set; }
-    public Room Room { get; set; }
-}
+✅ Generic API Responses for consistent output
+
+✅ EF Core Relationships (Room ➝ Beds)
+
+✅ Pagination Support
+
+✅ Centralized Error Handling Middleware
+
+✅ Secure MVC UI for both admin and user workflows
+
+---
+🚀 Getting Started
+🖥️ Prerequisites
+.NET 8 SDK
+
+SQL Server or SQL Server LocalDB
+
+📥 Clone & Run
+
+// Run.Bash
+git clone https://github.com/your-username/RoomManagementSystem.git
+cd RoomManagementSystem
+dotnet restore
+dotnet ef database update
+dotnet run
+
+---
+📂 Project Structure
+
+/RoomManagementSolution
+├── RoomManagement.API         # Web API (JWT Auth, Business Logic)
+│   ├── Controllers
+│   ├── Services
+│   ├── DTOs
+│   ├── Middleware
+│   └── JWT Config & Extensions
+│
+├── RoomManagement.MVC         # ASP.NET MVC (UI Layer)
+│   ├── Controllers
+│   ├── Views
+│   ├── Auth UI
+│   └── Role-specific Views
+│
+└── RoomManagement.Domain      # Models & Identity
+    ├── Entities (Room, Bed)
+    ├── ApplicationUser.cs
+    └── Enums / DTOs
