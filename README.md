@@ -1,6 +1,6 @@
-# 🛏️ Room Management System (Fullstack ASP.NET 8 MVC + API)
+# 🛏️ Room Management System (Fullstack ASP.NET  MVC + API)
 
-A full-stack Room Management system built using **ASP.NET Core 8**, leveraging a clean architecture that separates concerns between API services and the MVC client. It allows Admins to fully manage rooms and beds while regular users have read-only access.
+A full-stack Room Management system built using **ASP.NET Core **, leveraging a clean architecture that separates concerns between API services and the MVC client. It allows Admins to fully manage rooms and beds while regular users have read-only access.
 
 ---
 
