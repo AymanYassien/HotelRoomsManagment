@@ -6,8 +6,8 @@ A full-stack Room Management system built using **ASP.NET Core **, leveraging a 
 
 ## 🔧 Tech Stack
 
-- **Backend**: ASP.NET Core 8 Web API  
-- **Frontend**: ASP.NET Core 8 MVC 
+- **Backend**: ASP.NET Core Web API  
+- **Frontend**: ASP.NET Core MVC 
 - **Authentication**: ASP.NET Core Identity  
 - **Authorization**: Role-based (`Admin`, `User`)  
 - **Tokens**: JWT + Refresh Token (stored in **cookies**)  
